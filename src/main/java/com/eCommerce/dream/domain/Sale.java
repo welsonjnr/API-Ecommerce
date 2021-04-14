@@ -1,25 +1,11 @@
 
 package com.eCommerce.dream.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 @Entity
 public class Sale {
@@ -31,18 +17,23 @@ public class Sale {
     private Integer quantity;
     @Temporal(TemporalType.TIME)
     private Date currentDate;
-    
-    @OneToOne
-    private ProductSales sales;
-   
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="client")
+    private Client client;
+
+    @OneToMany(mappedBy = "sale")
+    private List<ProductSales> productSalesId;
+
     public Sale() {}
 
-    public Sale(Long id, BigDecimal amount, Integer quantity, Date currentDate, ProductSales sales) {
+    public Sale(Long id, BigDecimal amount, Integer quantity, Date currentDate, Client client, List<ProductSales> productSalesId) {
         this.id = id;
         this.amount = amount;
         this.quantity = quantity;
         this.currentDate = currentDate;
-        this.sales = sales;
+        this.client = client;
+        this.productSalesId = productSalesId;
     }
 
     public Long getId() {
@@ -77,12 +68,12 @@ public class Sale {
         this.currentDate = currentDate;
     }
 
-    public ProductSales getSales() {
-        return sales;
+    public List<ProductSales> getProductSalesId() {
+        return productSalesId;
     }
 
-    public void setSales(ProductSales sales) {
-        this.sales = sales;
+    public void setProductSalesId(List<ProductSales> productSalesId) {
+        this.productSalesId = productSalesId;
     }
 
     @Override
@@ -109,5 +100,5 @@ public class Sale {
         }
         return true;
     }
-      
+
 }

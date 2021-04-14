@@ -5,16 +5,11 @@
  */
 package com.eCommerce.dream.domain;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 import javax.annotation.Generated;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 public class ProductSales {
@@ -22,19 +17,24 @@ public class ProductSales {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    @OneToMany
-    private List<Product> products;
-    
-    @OneToOne
-    private Client client;
+    private Integer quantity;
+    private BigDecimal preco;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id")
+    private Product product;
+
+    @ManyToOne
+    @JoinColumn(name="sale")
+    private Sale sale;
 
     public ProductSales() {}
 
-    public ProductSales(Long id, List<Product> products, Client client) {
+    public ProductSales(Long id, Integer quantity, BigDecimal preco, Product product) {
         this.id = id;
-        this.products = products;
-        this.client = client;
+        this.quantity = quantity;
+        this.preco = preco;
+        this.product = product;
     }
 
     public Long getId() {
@@ -45,20 +45,36 @@ public class ProductSales {
         this.id = id;
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public Integer getQuantity() {
+        return quantity;
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
-    public Client getClient() {
-        return client;
+    public BigDecimal getPreco() {
+        return preco;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setPreco(BigDecimal preco) {
+        this.preco = preco;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Sale getSale() {
+        return sale;
+    }
+
+    public void setSale(Sale sale) {
+        this.sale = sale;
     }
 
     @Override
@@ -85,5 +101,5 @@ public class ProductSales {
         }
         return true;
     }
-    
+
 }

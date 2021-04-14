@@ -1,24 +1,12 @@
 
 package com.eCommerce.dream.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Date;
 import java.util.Objects;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 @Entity
-@Table(name = "movements")
-public class Movement {
+public class Transaction {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,16 +14,12 @@ public class Movement {
     
     @Temporal(TemporalType.TIME)
     private Date currentDate;
-    
-    @OneToOne(cascade = CascadeType.ALL)
-    private Sale sale;
 
-    public Movement() {}
+    public Transaction() {}
 
-    public Movement(Long id, Date currentDate, Sale sale) {
+    public Transaction(Long id, Date currentDate) {
         this.id = id;
         this.currentDate = currentDate;
-        this.sale = sale;
     }
 
     public Long getId() {
@@ -52,14 +36,6 @@ public class Movement {
 
     public void setCurrentDate(Date currentDate) {
         this.currentDate = currentDate;
-    }
-
-    public Sale getSale() {
-        return sale;
-    }
-
-    public void setSale(Sale sale) {
-        this.sale = sale;
     }
 
     @Override
@@ -80,7 +56,7 @@ public class Movement {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Movement other = (Movement) obj;
+        final Transaction other = (Transaction) obj;
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }

@@ -26,7 +26,8 @@ public class ClientResources {
     public ResponseEntity<ClientDetailDTO> findById(@PathVariable Long id) throws ObjectNotFoundException{
         Optional<Client> client = repository.findById(id);
         ClientDetailDTO clientDTO = new ClientDetailDTO(client.get());
-           return (clientDTO != null) ? 
+
+           return (clientDTO != null) ?
            ResponseEntity.ok().body(clientDTO) :
            ResponseEntity.notFound().build();
     }

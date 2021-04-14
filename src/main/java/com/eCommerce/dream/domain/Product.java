@@ -4,14 +4,7 @@ package com.eCommerce.dream.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 @Entity
 public class Product {
@@ -38,7 +31,11 @@ public class Product {
     @ManyToOne
     @JoinColumn(name="product_category_id")
     private Category category;
-   
+
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
+    private ProductSales productSales;
+
     public Product() {}
 
     public Product(Long id, String name, String description, String shortDescription, String specifications, Integer quantity, Boolean available, String size, String brand, String unity, List<Price> prices, List<Images> imgs, Category category) {

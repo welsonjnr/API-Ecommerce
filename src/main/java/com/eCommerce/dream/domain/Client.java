@@ -1,15 +1,11 @@
 package com.eCommerce.dream.domain;
 
+import org.hibernate.annotations.Cascade;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 public class Client {
@@ -25,6 +21,10 @@ public class Client {
         
     @OneToMany(mappedBy = "client")
     private List<Address> address;
+
+    @OneToOne(mappedBy = "client", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
+    private Sale sale;
 
     public Client() {}
 
