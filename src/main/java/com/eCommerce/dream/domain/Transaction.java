@@ -11,15 +11,11 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    @Temporal(TemporalType.TIME)
-    private Date currentDate;
 
     public Transaction() {}
 
-    public Transaction(Long id, Date currentDate) {
+    public Transaction(Long id) {
         this.id = id;
-        this.currentDate = currentDate;
     }
 
     public Long getId() {
@@ -28,14 +24,6 @@ public class Transaction {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Date getCurrentDate() {
-        return currentDate;
-    }
-
-    public void setCurrentDate(Date currentDate) {
-        this.currentDate = currentDate;
     }
 
     @Override
@@ -62,5 +50,5 @@ public class Transaction {
         }
         return true;
     }
-     
+
 }

@@ -37,6 +37,16 @@ public class Client {
         this.description = description;
     }
 
+    public Client(Long id, String name, String cpf, Date birthDate, String nickName, String description, List<Address> address) {
+        this.id = id;
+        this.name = name;
+        this.cpf = cpf;
+        this.birthDate = birthDate;
+        this.nickName = nickName;
+        this.description = description;
+        this.address = address;
+    }
+
     public Long getId() {
         return id;
     }

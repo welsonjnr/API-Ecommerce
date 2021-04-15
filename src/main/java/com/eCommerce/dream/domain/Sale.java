@@ -1,6 +1,8 @@
 
 package com.eCommerce.dream.domain;
 
+import org.joda.time.LocalDate;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -14,9 +16,7 @@ public class Sale {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private BigDecimal amount;
-    private Integer quantity;
-    @Temporal(TemporalType.TIME)
-    private Date currentDate;
+    private LocalDate dataSale;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="client")
@@ -27,11 +27,10 @@ public class Sale {
 
     public Sale() {}
 
-    public Sale(Long id, BigDecimal amount, Integer quantity, Date currentDate, Client client, List<ProductSales> productSalesId) {
+    public Sale(Long id, BigDecimal amount, LocalDate dataSale, Client client, List<ProductSales> productSalesId) {
         this.id = id;
         this.amount = amount;
-        this.quantity = quantity;
-        this.currentDate = currentDate;
+        this.dataSale = dataSale;
         this.client = client;
         this.productSalesId = productSalesId;
     }
@@ -52,20 +51,20 @@ public class Sale {
         this.amount = amount;
     }
 
-    public Integer getQuantity() {
-        return quantity;
+    public LocalDate getDataSale() {
+        return dataSale;
     }
 
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+    public void setDataSale(LocalDate dataSale) {
+        this.dataSale = dataSale;
     }
 
-    public Date getCurrentDate() {
-        return currentDate;
+    public Client getClient() {
+        return client;
     }
 
-    public void setCurrentDate(Date currentDate) {
-        this.currentDate = currentDate;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public List<ProductSales> getProductSalesId() {
