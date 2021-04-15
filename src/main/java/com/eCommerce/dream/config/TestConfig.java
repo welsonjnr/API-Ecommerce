@@ -7,6 +7,8 @@ import com.eCommerce.dream.domain.Country;
 import com.eCommerce.dream.repository.AddressRepository;
 import com.eCommerce.dream.repository.ClientRepository;
 import com.eCommerce.dream.repository.CountryRepository;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,20 @@ public class TestConfig implements  CommandLineRunner{
     
     @Override
     public void run(String... args) throws Exception {
-         
+        List<Address> addrs = new ArrayList<>();
+        Country country = new Country(null, "Brasil", "BR");
+        Address address = new Address(null, "Rua principal", "S/N", "Setor central", "Em frente a loja", "76.160-000", "Goiânia",country);
+        Client client = new Client();
+        addrs.add(address);
+        client.setId(null);
+        client.setBirthDate(new Date());
+        client.setCpf("025.258.369-21");
+        client.setDescription("Cliente teste");
+        client.setName("Teste");
+        client.setNickName("Testinho");
+        client.setAddress(addrs);
+
+        repositoryCount.save(country);
+
     }
 }

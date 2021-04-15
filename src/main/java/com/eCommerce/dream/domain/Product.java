@@ -1,7 +1,6 @@
 
 package com.eCommerce.dream.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
@@ -34,7 +33,7 @@ public class Product {
 
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL,
             fetch = FetchType.LAZY, optional = false)
-    private ProductSales productSales;
+    private ProductSale productSale;
 
     public Product() {}
 

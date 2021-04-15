@@ -22,10 +22,6 @@ public class Client {
     @OneToMany(mappedBy = "client")
     private List<Address> address;
 
-    @OneToOne(mappedBy = "client", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
-    private Sale sale;
-
     public Client() {}
 
     public Client(Long id, String name, String cpf, Date birthDate, String nickName, String description) {

@@ -6,13 +6,11 @@
 package com.eCommerce.dream.domain;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Objects;
-import javax.annotation.Generated;
 import javax.persistence.*;
 
 @Entity
-public class ProductSales {
+public class ProductSale {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,9 +26,9 @@ public class ProductSales {
     @JoinColumn(name="sale_id")
     private Sale sale;
 
-    public ProductSales() {}
+    public ProductSale() {}
 
-    public ProductSales(Long id, Integer quantity, BigDecimal preco, Product product) {
+    public ProductSale(Long id, Integer quantity, BigDecimal preco, Product product) {
         this.id = id;
         this.quantity = quantity;
         this.preco = preco;
@@ -95,7 +93,7 @@ public class ProductSales {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final ProductSales other = (ProductSales) obj;
+        final ProductSale other = (ProductSale) obj;
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }

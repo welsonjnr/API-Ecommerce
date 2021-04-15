@@ -4,7 +4,6 @@ package com.eCommerce.dream.domain;
 import org.joda.time.LocalDate;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
@@ -23,16 +22,16 @@ public class Sale {
     private Client client;
 
     @OneToMany(mappedBy = "sale")
-    private List<ProductSales> productSalesId;
+    private List<ProductSale> productSaleId;
 
     public Sale() {}
 
-    public Sale(Long id, BigDecimal amount, LocalDate dataSale, Client client, List<ProductSales> productSalesId) {
+    public Sale(Long id, BigDecimal amount, LocalDate dataSale, Client client, List<ProductSale> productSaleId) {
         this.id = id;
         this.amount = amount;
         this.dataSale = dataSale;
         this.client = client;
-        this.productSalesId = productSalesId;
+        this.productSaleId = productSaleId;
     }
 
     public Long getId() {
@@ -67,12 +66,12 @@ public class Sale {
         this.client = client;
     }
 
-    public List<ProductSales> getProductSalesId() {
-        return productSalesId;
+    public List<ProductSale> getProductSalesId() {
+        return productSaleId;
     }
 
-    public void setProductSalesId(List<ProductSales> productSalesId) {
-        this.productSalesId = productSalesId;
+    public void setProductSalesId(List<ProductSale> productSaleId) {
+        this.productSaleId = productSaleId;
     }
 
     @Override
