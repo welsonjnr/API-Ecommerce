@@ -43,8 +43,9 @@ public class TestConfig implements  CommandLineRunner{
         client.setName("Teste");
         client.setNickName("Testinho");
         client.setAddress(addrs);
-
+        addrs.get(0).setClient(client);
         repositoryCount.save(country);
-
+        repositoryCli.save(client);
+        repositoryAddr.saveAll(addrs);
     }
 }

@@ -31,5 +31,4 @@ public class ClientResources {
            ResponseEntity.ok().body(clientDTO) :
            ResponseEntity.notFound().build();
     }
-    
 }

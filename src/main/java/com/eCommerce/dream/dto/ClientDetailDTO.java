@@ -3,6 +3,8 @@ package com.eCommerce.dream.dto;
 
 import com.eCommerce.dream.domain.Address;
 import com.eCommerce.dream.domain.Client;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.Date;
 import java.util.List;
 
@@ -14,9 +16,7 @@ public class ClientDetailDTO {
     private Date birthDate;
     private String nickName;
     private String description;
-    
     private List<Address> address;
-
 
     public ClientDetailDTO() {}
 
