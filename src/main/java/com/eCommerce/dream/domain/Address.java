@@ -1,5 +1,6 @@
 package com.eCommerce.dream.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -20,7 +21,7 @@ public class Address {
     private String city;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonManagedReference
+    @JsonBackReference
     @JoinColumn(name="client_id")
     private Client client;
     

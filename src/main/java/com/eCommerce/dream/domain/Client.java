@@ -1,5 +1,7 @@
 package com.eCommerce.dream.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Cascade;
 
 import java.util.Date;
@@ -20,6 +22,7 @@ public class Client {
     private String description;
         
     @OneToMany(mappedBy = "client")
+    @JsonManagedReference
     private List<Address> address;
 
     public Client() {}
