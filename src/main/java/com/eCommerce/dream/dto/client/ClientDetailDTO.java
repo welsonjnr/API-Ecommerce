@@ -1,22 +1,23 @@
 
-package com.eCommerce.dream.dto;
+package com.eCommerce.dream.dto.client;
 
 import com.eCommerce.dream.domain.Address;
 import com.eCommerce.dream.domain.Client;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.eCommerce.dream.dto.address.AddressDetailDTO;
+import java.lang.String;
 
-import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ClientDetailDTO {
     
     private Long id;
     private String nameClient;
     private String cpf;
-    private Date birthDate;
+    private String birthDate;
     private String nickName;
     private String description;
-    private List<Address> address;
+    private List<AddressDetailDTO> addressDTO;
 
     public ClientDetailDTO() {}
 
@@ -27,8 +28,7 @@ public class ClientDetailDTO {
         this.birthDate = client.getBirthDate();
         this.nickName = client.getNickName();
         this.description = client.getDescription();
-        this.address = client.getAddress();
-          
+        this.addressDTO = converterAddress(client.getAddress());
     }
     
     public Long getId() {
@@ -55,11 +55,11 @@ public class ClientDetailDTO {
         this.cpf = cpf;
     }
 
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -79,12 +79,16 @@ public class ClientDetailDTO {
         this.description = description;
     }
 
-    public List<Address> getAddress() {
-        return address;
+    public List<AddressDetailDTO> getAddressDTO() {
+        return addressDTO;
     }
 
-    public void setAddress(List<Address> address) {
-        this.address = address;
+    public void setAddressDTO(List<AddressDetailDTO> addressDTO) {
+        this.addressDTO = addressDTO;
     }
-  
+
+    public List<AddressDetailDTO> converterAddress(List<Address> address){
+        List<AddressDetailDTO> listDTO = address.stream().map(AddressDetailDTO::new).collect(Collectors.toList());
+        return listDTO;
+    }
 }

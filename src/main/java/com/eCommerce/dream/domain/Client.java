@@ -1,10 +1,12 @@
 package com.eCommerce.dream.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.hibernate.annotations.Cascade;
+import java.lang.String;
 
 import java.util.Date;
+import java.util.Date;
+
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
@@ -17,7 +19,7 @@ public class Client {
     private Long id;
     private String name;
     private String cpf;
-    private Date birthDate;
+    private String birthDate;
     private String nickName;
     private String description;
         
@@ -27,7 +29,7 @@ public class Client {
 
     public Client() {}
 
-    public Client(Long id, String name, String cpf, Date birthDate, String nickName, String description) {
+    public Client(Long id, String name, String cpf, String birthDate, String nickName, String description) {
         this.id = id;
         this.name = name;
         this.cpf = cpf;
@@ -36,7 +38,7 @@ public class Client {
         this.description = description;
     }
 
-    public Client(Long id, String name, String cpf, Date birthDate, String nickName, String description, List<Address> address) {
+    public Client(Long id, String name, String cpf, String birthDate, String nickName, String description, List<Address> address) {
         this.id = id;
         this.name = name;
         this.cpf = cpf;
@@ -70,11 +72,11 @@ public class Client {
         this.cpf = cpf;
     }
 
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 

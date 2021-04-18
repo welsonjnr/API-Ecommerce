@@ -1,6 +1,7 @@
 
 package com.eCommerce.dream.domain;
 
+import com.eCommerce.dream.enums.SaleStatus;
 import org.joda.time.LocalDate;
 
 import java.math.BigDecimal;
@@ -17,6 +18,9 @@ public class Sale {
     private BigDecimal amount;
     private LocalDate dataSale;
 
+    @Enumerated(value = EnumType.STRING)
+    private SaleStatus saleStatus;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="client")
     private Client client;
@@ -26,10 +30,11 @@ public class Sale {
 
     public Sale() {}
 
-    public Sale(Long id, BigDecimal amount, LocalDate dataSale, Client client, List<ProductSale> productSaleId) {
+    public Sale(Long id, BigDecimal amount, LocalDate dataSale, SaleStatus saleStatus, Client client, List<ProductSale> productSaleId) {
         this.id = id;
         this.amount = amount;
         this.dataSale = dataSale;
+        this.saleStatus = saleStatus;
         this.client = client;
         this.productSaleId = productSaleId;
     }
@@ -57,6 +62,10 @@ public class Sale {
     public void setDataSale(LocalDate dataSale) {
         this.dataSale = dataSale;
     }
+
+    public SaleStatus getSaleStatus() { return saleStatus; }
+
+    public void setSaleStatus(SaleStatus saleStatus) { this.saleStatus = saleStatus; }
 
     public Client getClient() {
         return client;
