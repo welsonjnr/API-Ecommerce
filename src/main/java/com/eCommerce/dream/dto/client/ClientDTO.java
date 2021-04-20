@@ -14,6 +14,7 @@ public class ClientDTO {
     private String nickname;
     private String cpf;
     private Integer addresses;
+    private String phone;
     private List<AddressDTO> addressDTO;
 
     public ClientDTO() {}
@@ -23,6 +24,7 @@ public class ClientDTO {
         this.nameClient = client.getName();
         this.nickname = client.getNickName();
         this.cpf = client.getCpf();
+        this.phone = client.getPhone();
         this.addresses = client.getAddress().size();
         this.addressDTO = converterAddress(client.getAddress());
     }
@@ -57,6 +59,14 @@ public class ClientDTO {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public Integer getAddresses() {

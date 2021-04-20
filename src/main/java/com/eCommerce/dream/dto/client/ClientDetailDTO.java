@@ -17,6 +17,7 @@ public class ClientDetailDTO {
     private String birthDate;
     private String nickName;
     private String description;
+    private String phone;
     private List<AddressDetailDTO> addressDTO;
 
     public ClientDetailDTO() {}
@@ -28,6 +29,7 @@ public class ClientDetailDTO {
         this.birthDate = client.getBirthDate();
         this.nickName = client.getNickName();
         this.description = client.getDescription();
+        this.phone = client.getPhone();
         this.addressDTO = converterAddress(client.getAddress());
     }
     
@@ -77,6 +79,14 @@ public class ClientDetailDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public List<AddressDetailDTO> getAddressDTO() {

@@ -6,9 +6,7 @@ import org.joda.time.LocalDate;
 
 import java.util.Date;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 public class ClientNewDTO {
 
@@ -22,6 +20,9 @@ public class ClientNewDTO {
     private String birthDate;
     private String nickName;
     private String description;
+    @NotBlank(message = "Phone cannot be null")
+    @Size(min = 11, max = 11)
+    private String phone;
 
     //Address
     @NotBlank(message = "Address street cannot be null")
@@ -95,6 +96,14 @@ public class ClientNewDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getStreet() {

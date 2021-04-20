@@ -39,7 +39,7 @@ public class ClientServices {
         Country country = repositoryCountry.findByNameContaining(objDto.getNameCountry()).get();
         Address address = new Address(null, objDto.getStreet(), objDto.getNumber(), objDto.getSector(), objDto.getComplement(), objDto.getCep(), objDto.getCity(), country);
         addresses.add(address);
-        Client client = new Client(null, objDto.getNameClient(), objDto.getCpf(), objDto.getBirthDate(), objDto.getNickName(), objDto.getDescription(), addresses);
+        Client client = new Client(null, objDto.getNameClient(), objDto.getCpf(), objDto.getBirthDate(), objDto.getNickName(), objDto.getDescription(), objDto.getPhone(),addresses);
         addresses.get(0).setClient(client);
         repositoryClient.save(client);
         repositoryAddress.save(address);
@@ -51,7 +51,7 @@ public class ClientServices {
         Country country = repositoryCountry.findByNameContaining(objDto.getNameCountry()).get();
         Address address = new Address(null, objDto.getStreet(), objDto.getNumber(), objDto.getSector(), objDto.getComplement(), objDto.getCep(), objDto.getCity(), country);
         addresses.add(address);
-        Client client = new Client(null, objDto.getNameClient(), objDto.getCpf(), objDto.getBirthDate(), objDto.getNickName(), objDto.getDescription(), addresses);
+        Client client = new Client(null, objDto.getNameClient(), objDto.getCpf(), objDto.getBirthDate(), objDto.getNickName(), objDto.getDescription(), objDto.getPhone(), addresses);
         addresses.get(0).setClient(client);
         repositoryClient.save(client);
         repositoryAddress.save(address);

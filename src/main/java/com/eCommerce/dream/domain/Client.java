@@ -22,6 +22,7 @@ public class Client {
     private String birthDate;
     private String nickName;
     private String description;
+    private String phone;
         
     @OneToMany(mappedBy = "client")
     @JsonManagedReference
@@ -29,22 +30,24 @@ public class Client {
 
     public Client() {}
 
-    public Client(Long id, String name, String cpf, String birthDate, String nickName, String description) {
+    public Client(Long id, String name, String cpf, String birthDate, String nickName, String description, String phone) {
         this.id = id;
         this.name = name;
         this.cpf = cpf;
         this.birthDate = birthDate;
         this.nickName = nickName;
         this.description = description;
+        this.phone = phone;
     }
 
-    public Client(Long id, String name, String cpf, String birthDate, String nickName, String description, List<Address> address) {
+    public Client(Long id, String name, String cpf, String birthDate, String nickName, String description, String phone, List<Address> address) {
         this.id = id;
         this.name = name;
         this.cpf = cpf;
         this.birthDate = birthDate;
         this.nickName = nickName;
         this.description = description;
+        this.phone = phone;
         this.address = address;
     }
 
@@ -94,6 +97,14 @@ public class Client {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public List<Address> getAddress() {
