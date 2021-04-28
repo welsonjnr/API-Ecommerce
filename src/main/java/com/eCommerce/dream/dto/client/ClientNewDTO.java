@@ -1,10 +1,6 @@
 package com.eCommerce.dream.dto.client;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.validator.constraints.br.CPF;
-import org.joda.time.LocalDate;
-
-import java.util.Date;
 
 import javax.validation.constraints.*;
 

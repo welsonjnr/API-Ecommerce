@@ -12,13 +12,8 @@ import com.eCommerce.dream.repository.CountryRepository;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.eCommerce.dream.repository.UserRepository;
-import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -54,7 +49,7 @@ public class TestConfig implements  CommandLineRunner{
         addrs.add(address2);
         addrs.add(address3);
         client.setId(null);
-        client.setBirthDate(new LocalDate().toString("dd-MM"));
+        client.setBirthDate(new Date().toString());
         client.setCpf("025.258.369-21");
         client.setDescription("Cliente teste");
         client.setName("Teste");
