@@ -41,4 +41,6 @@ public class SubcategoriesDTO {
     public void setCategory(CategoryDTO category) {
         this.category = category;
     }
+
+
 }

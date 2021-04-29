@@ -4,26 +4,41 @@ import com.eCommerce.dream.domain.Category;
 import com.eCommerce.dream.domain.Images;
 import com.eCommerce.dream.domain.Price;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 public class ProductNewDTO {
 
+    //Product
+    @NotBlank(message = "Product name cannot be null")
+    @Size(min = 4, message = "The customer's name must be at least 4 characters")
     private String name;
+    @NotBlank(message = "Product description cannot be null")
+    @Size(min = 15, message = "The Product description must be at least 15 characters")
     private String description;
+    @NotBlank(message = "Product shotDescription cannot be null")
+    @Size(min = 10, message = "The Product short description must be at least 10 characters")
     private String shorDescription;
     private String specifications;
+    @NotBlank(message = "Product quantity cannot be null")
     private Integer quantity;
     private String size;
+    @NotBlank(message = "Product brand cannot be null")
     private String brand;
+    private Boolean available = Boolean.TRUE;
     private String unity;
+    @NotBlank(message = "Product category cannot be null")
     private Category category;
+    @NotBlank(message = "Product prices cannot be null")
     private List<Price> prices;
+    @NotBlank(message = "Product imgs cannot be null")
     private List<Images> imgs;
 
     public ProductNewDTO() {}
 
     public ProductNewDTO(String name, String description, String shorDescription, String specifications, Integer quantity,
-                         String size, String brand, String unity, Category category, List<Price> prices) {
+                         String size, String brand, Boolean available, String unity, Category category, List<Price> prices) {
         this.name = name;
         this.description = description;
         this.shorDescription = shorDescription;
@@ -31,13 +46,14 @@ public class ProductNewDTO {
         this.quantity = quantity;
         this.size = size;
         this.brand = brand;
+        this.available = available;
         this.unity = unity;
         this.category = category;
         this.prices = prices;
     }
 
     public ProductNewDTO(String name, String description, String shorDescription, String specifications, Integer quantity, String size,
-                         String brand, String unity, Category category, List<Price> prices, List<Images> imgs) {
+                         String brand, Boolean available, String unity, Category category, List<Price> prices, List<Images> imgs) {
         this.name = name;
         this.description = description;
         this.shorDescription = shorDescription;
@@ -45,6 +61,7 @@ public class ProductNewDTO {
         this.quantity = quantity;
         this.size = size;
         this.brand = brand;
+        this.available = available;
         this.unity = unity;
         this.category = category;
         this.prices = prices;
@@ -105,6 +122,14 @@ public class ProductNewDTO {
 
     public void setBrand(String brand) {
         this.brand = brand;
+    }
+
+    public Boolean getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 
     public String getUnity() {
