@@ -1,13 +1,9 @@
 
 package com.eCommerce.dream.domain;
 
+import java.util.List;
 import java.util.Objects;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class Images {
@@ -15,15 +11,43 @@ public class Images {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; 
-    
+
+    @Lob
+    private List<byte[]> images;
+
     @ManyToOne
     @JoinColumn(name="product_imgs_id")
     private Product product;
 
     public Images() {}
 
-    public Images(Long id, Product product) {
+    public Images(Long id, List<byte[]> images, Product product) {
         this.id = id;
+        this.images = images;
+        this.product = product;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<byte[]> getImages() {
+        return images;
+    }
+
+    public void setImages(List<byte[]> images) {
+        this.images = images;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
         this.product = product;
     }
 
