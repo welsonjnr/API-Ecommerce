@@ -10,10 +10,13 @@ public class Images {
    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; 
+    private Long id;
+    private String imageName;
+    private String type;
 
     @Lob
-    private List<byte[]> images;
+    @Column(length = 1000)
+    private byte[] images;
 
     @ManyToOne
     @JoinColumn(name="product_imgs_id")
@@ -21,10 +24,14 @@ public class Images {
 
     public Images() {}
 
-    public Images(Long id, List<byte[]> images, Product product) {
-        this.id = id;
+    public Images(byte[] images) {
         this.images = images;
-        this.product = product;
+    }
+
+    public Images(String imageName, String type, byte[] images) {
+        this.imageName = imageName;
+        this.type = type;
+        this.images = images;
     }
 
     public Long getId() {
@@ -35,11 +42,27 @@ public class Images {
         this.id = id;
     }
 
-    public List<byte[]> getImages() {
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public byte[] getImages() {
         return images;
     }
 
-    public void setImages(List<byte[]> images) {
+    public void setImages(byte[] images) {
         this.images = images;
     }
 
