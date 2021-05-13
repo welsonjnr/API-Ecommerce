@@ -1,7 +1,7 @@
 package com.eCommerce.dream.services;
 
 import com.eCommerce.dream.domain.*;
-import com.eCommerce.dream.dto.category.CategoryNewDTO;
+import com.eCommerce.dream.dto.sale.ProductSaleNewDTO;
 import com.eCommerce.dream.dto.sale.SaleNewDTO;
 import com.eCommerce.dream.repository.SaleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +31,14 @@ public class SaleServices {
         repositoryCategory.save(category);
 */
         return new Sale();
+    }
+
+    private SaleNewDTO converterSale(List<ProductSaleNewDTO> productsForSale){
+
+        SaleNewDTO newSale = new ArrayList<>();
+        productsForSale.forEach(prodSale -> );
+
+        return new SaleNewDTO();
     }
 
 }

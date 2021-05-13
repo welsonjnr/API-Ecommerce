@@ -1,11 +1,8 @@
 package com.eCommerce.dream.resources;
 
-import com.eCommerce.dream.domain.Product;
 import com.eCommerce.dream.domain.Sale;
-import com.eCommerce.dream.dto.product.ProductDTO;
-import com.eCommerce.dream.dto.product.ProductNewDTO;
 import com.eCommerce.dream.dto.sale.SaleDTO;
-import com.eCommerce.dream.dto.sale.SaleNewDTO;
+import com.eCommerce.dream.dto.sale.ProductSaleNewDTO;
 import com.eCommerce.dream.repository.SaleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +26,7 @@ public class SaleResources {
     private SaleService services;
 
     @PostMapping
-    public ResponseEntity<SaleNewDTO> insert(@Valid @RequestBody SaleNewDTO newSale, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<ProductSaleNewDTO> insert(@Valid @RequestBody ProductSaleNewDTO newSale, UriComponentsBuilder uriBuilder){
         Sale sale = services.save(newSale);
         URI uri = uriBuilder.path("/sale/{id}").buildAndExpand(sale.getId()).toUri();
         return ResponseEntity.created(uri).body(new SaleDTO(sale));

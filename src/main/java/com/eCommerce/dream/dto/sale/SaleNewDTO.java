@@ -1,28 +1,46 @@
 package com.eCommerce.dream.dto.sale;
 
 import com.eCommerce.dream.domain.Client;
-import com.eCommerce.dream.domain.ProductSale;
 
 import javax.validation.constraints.NotBlank;
+import java.math.BigDecimal;
 import java.util.List;
 
 public class SaleNewDTO {
 
-    @NotBlank(message = "The sale cannot be made without products")
-    private List<ProductSale> products;
-    @NotBlank(message = "The sale cannot be made without a client")
+    private Integer totalProducts;
+    private BigDecimal amountOfProducts;
+    @NotBlank(message = "Product for sale cannot be empty")
+    private List<ProductSaleNewDTO> products;
+    @NotBlank(message = "Client cannot bem empty for sale")
     private Client client;
 
-    public SaleNewDTO(List<ProductSale> products, Client client) {
+    public SaleNewDTO(List<ProductSaleNewDTO> products, Client client) {
         this.products = products;
         this.client = client;
     }
 
-    public List<ProductSale> getProducts() {
+    public Integer getTotalProducts() {
+        return totalProducts;
+    }
+
+    public void setTotalProducts(Integer totalProducts) {
+        this.totalProducts = totalProducts;
+    }
+
+    public BigDecimal getAmountOfProducts() {
+        return amountOfProducts;
+    }
+
+    public void setAmountOfProducts(BigDecimal amountOfProducts) {
+        this.amountOfProducts = amountOfProducts;
+    }
+
+    public List<ProductSaleNewDTO> getProducts() {
         return products;
     }
 
-    public void setProducts(List<ProductSale> products) {
+    public void setProducts(List<ProductSaleNewDTO> products) {
         this.products = products;
     }
 
