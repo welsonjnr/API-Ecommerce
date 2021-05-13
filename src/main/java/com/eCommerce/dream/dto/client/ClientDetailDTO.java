@@ -6,6 +6,8 @@ import com.eCommerce.dream.domain.Client;
 import com.eCommerce.dream.dto.address.AddressDetailDTO;
 import java.lang.String;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,7 +16,7 @@ public class ClientDetailDTO {
     private Long id;
     private String nameClient;
     private String cpf;
-    private String birthDate;
+    private LocalDate birthDate;
     private String nickName;
     private String description;
     private String phone;
@@ -57,11 +59,11 @@ public class ClientDetailDTO {
         this.cpf = cpf;
     }
 
-    public String getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 

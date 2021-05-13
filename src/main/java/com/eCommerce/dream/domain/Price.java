@@ -27,6 +27,11 @@ public class Price {
 
     public Price() {}
 
+    public Price(BigDecimal salePrice, BigDecimal costPrice) {
+        this.salePrice = salePrice;
+        this.costPrice = costPrice;
+    }
+
     public Price(Long id, BigDecimal salePrice, BigDecimal costPrice, Long percentagePrice, Product product) {
         this.id = id;
         this.salePrice = salePrice;

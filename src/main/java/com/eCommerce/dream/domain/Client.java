@@ -4,6 +4,8 @@ package com.eCommerce.dream.domain;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.lang.String;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Date;
 
@@ -19,7 +21,7 @@ public class Client {
     private Long id;
     private String name;
     private String cpf;
-    private String birthDate;
+    private LocalDate birthDate;
     private String nickName;
     private String description;
     private String phone;
@@ -30,7 +32,7 @@ public class Client {
 
     public Client() {}
 
-    public Client(Long id, String name, String cpf, String birthDate, String nickName, String description, String phone) {
+    public Client(Long id, String name, String cpf, LocalDate birthDate, String nickName, String description, String phone) {
         this.id = id;
         this.name = name;
         this.cpf = cpf;
@@ -40,7 +42,7 @@ public class Client {
         this.phone = phone;
     }
 
-    public Client(Long id, String name, String cpf, String birthDate, String nickName, String description, String phone, List<Address> address) {
+    public Client(Long id, String name, String cpf, LocalDate birthDate, String nickName, String description, String phone, List<Address> address) {
         this.id = id;
         this.name = name;
         this.cpf = cpf;
@@ -75,11 +77,11 @@ public class Client {
         this.cpf = cpf;
     }
 
-    public String getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 

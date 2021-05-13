@@ -1,6 +1,7 @@
 package com.eCommerce.dream.services;
 
 import com.eCommerce.dream.domain.*;
+import com.eCommerce.dream.dto.address.AddressDetailDTO;
 import com.eCommerce.dream.dto.client.ClientNewDTO;
 import com.eCommerce.dream.dto.product.ProductNewDTO;
 import com.eCommerce.dream.repository.CategoryRepository;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServices {
@@ -30,7 +32,9 @@ public class ProductServices {
     private CategoryRepository repositoryCategory;
 
     public Product save(ProductNewDTO objDto){
-        List<Price> prices = objDto.getPrices();
+        List<Price> prices = new ArrayList<>();
+        Price price = new Price(objDto.getCostPrice(), objDto.getSalePrice());
+        prices.add(price);
         repositoryPrice.saveAll(prices);
 
         List<Images> imgs = objDto.getImgs();

@@ -4,6 +4,7 @@ package com.eCommerce.dream.domain;
 import com.eCommerce.dream.enums.SaleStatus;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -16,7 +17,7 @@ public class Sale {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private BigDecimal amount;
-    private Date dataSale;
+    private LocalDateTime dataSale;
 
     @Enumerated(value = EnumType.STRING)
     private SaleStatus saleStatus;
@@ -30,7 +31,7 @@ public class Sale {
 
     public Sale() {}
 
-    public Sale(Long id, BigDecimal amount, Date dataSale, SaleStatus saleStatus, Client client, List<ProductSale> productSaleId) {
+    public Sale(Long id, BigDecimal amount, LocalDateTime dataSale, SaleStatus saleStatus, Client client, List<ProductSale> productSaleId) {
         this.id = id;
         this.amount = amount;
         this.dataSale = dataSale;
@@ -55,11 +56,11 @@ public class Sale {
         this.amount = amount;
     }
 
-    public Date getDataSale() {
+    public LocalDateTime getDataSale() {
         return dataSale;
     }
 
-    public void setDataSale(Date dataSale) {
+    public void setDataSale(LocalDateTime dataSale) {
         this.dataSale = dataSale;
     }
 

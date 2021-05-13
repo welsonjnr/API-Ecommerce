@@ -6,6 +6,7 @@ import com.eCommerce.dream.domain.Price;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.math.BigDecimal;
 import java.util.List;
 
 public class ProductNewDTO {
@@ -30,15 +31,17 @@ public class ProductNewDTO {
     private String unity;
     @NotBlank(message = "Product category cannot be null")
     private Category category;
-    @NotBlank(message = "Product prices cannot be null")
-    private List<Price> prices;
+    @NotBlank(message = "Product prices cannot be empty")
+    private BigDecimal salePrice;
+    @NotBlank(message = "Product price cost cannot be empty")
+    private BigDecimal costPrice;
     @NotBlank(message = "Product imgs cannot be null")
     private List<Images> imgs;
 
     public ProductNewDTO() {}
 
     public ProductNewDTO(String name, String description, String shorDescription, String specifications, Integer quantity,
-                         String size, String brand, Boolean available, String unity, Category category, List<Price> prices) {
+                         String size, String brand, Boolean available, String unity, Category category, BigDecimal costPrice, BigDecimal salePrice) {
         this.name = name;
         this.description = description;
         this.shorDescription = shorDescription;
@@ -49,11 +52,12 @@ public class ProductNewDTO {
         this.available = available;
         this.unity = unity;
         this.category = category;
-        this.prices = prices;
+        this.costPrice = costPrice;
+        this.salePrice = salePrice;
     }
 
     public ProductNewDTO(String name, String description, String shorDescription, String specifications, Integer quantity, String size,
-                         String brand, Boolean available, String unity, Category category, List<Price> prices, List<Images> imgs) {
+                         String brand, Boolean available, String unity, Category category, BigDecimal costPrice, BigDecimal salePrice, List<Images> imgs) {
         this.name = name;
         this.description = description;
         this.shorDescription = shorDescription;
@@ -64,7 +68,8 @@ public class ProductNewDTO {
         this.available = available;
         this.unity = unity;
         this.category = category;
-        this.prices = prices;
+        this.costPrice = costPrice;
+        this.salePrice = salePrice;
         this.imgs = imgs;
     }
 
@@ -148,12 +153,20 @@ public class ProductNewDTO {
         this.category = category;
     }
 
-    public List<Price> getPrices() {
-        return prices;
+    public BigDecimal getSalePrice() {
+        return salePrice;
     }
 
-    public void setPrices(List<Price> prices) {
-        this.prices = prices;
+    public void setSalePrice(BigDecimal salePrice) {
+        this.salePrice = salePrice;
+    }
+
+    public BigDecimal getCostPrice() {
+        return costPrice;
+    }
+
+    public void setCostPrice(BigDecimal costPrice) {
+        this.costPrice = costPrice;
     }
 
     public List<Images> getImgs() {

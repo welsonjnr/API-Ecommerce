@@ -9,6 +9,7 @@ import com.eCommerce.dream.repository.AddressRepository;
 import com.eCommerce.dream.repository.ClientRepository;
 import com.eCommerce.dream.repository.CountryRepository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -49,7 +50,7 @@ public class TestConfig implements  CommandLineRunner{
         addrs.add(address2);
         addrs.add(address3);
         client.setId(null);
-        client.setBirthDate(new Date().toString());
+        client.setBirthDate(LocalDate.of(1998, 8, 15));
         client.setCpf("025.258.369-21");
         client.setDescription("Cliente teste");
         client.setName("Teste");

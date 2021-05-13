@@ -40,7 +40,7 @@ public class ClientServices {
         Address address = new Address(null, objDto.getStreet(), objDto.getNumber(), objDto.getSector(), objDto.getComplement(), objDto.getCep(), objDto.getCity(), country);
         addresses.add(address);
         Client client = new Client(null, objDto.getNameClient(), objDto.getCpf(), objDto.getBirthDate(), objDto.getNickName(), objDto.getDescription(), objDto.getPhone(),addresses);
-        addresses.get(0).setClient(client);
+        addresses.forEach(adr -> adr.setClient(client));
         repositoryClient.save(client);
         repositoryAddress.save(address);
         return client;
@@ -52,7 +52,7 @@ public class ClientServices {
         Address address = new Address(null, objDto.getStreet(), objDto.getNumber(), objDto.getSector(), objDto.getComplement(), objDto.getCep(), objDto.getCity(), country);
         addresses.add(address);
         Client client = new Client(null, objDto.getNameClient(), objDto.getCpf(), objDto.getBirthDate(), objDto.getNickName(), objDto.getDescription(), objDto.getPhone(), addresses);
-        addresses.get(0).setClient(client);
+        addresses.forEach(adr -> address.setClient(client));
         repositoryClient.save(client);
         repositoryAddress.save(address);
         return client;
