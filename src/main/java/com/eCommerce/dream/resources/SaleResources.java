@@ -4,6 +4,7 @@ import com.eCommerce.dream.domain.Sale;
 import com.eCommerce.dream.dto.sale.SaleDTO;
 import com.eCommerce.dream.dto.sale.ProductSaleNewDTO;
 import com.eCommerce.dream.repository.SaleRepository;
+import com.eCommerce.dream.services.SaleServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/ecommerce/sale")
@@ -23,10 +25,10 @@ public class SaleResources {
     private SaleRepository repository;
 
     @Autowired
-    private SaleService services;
+    private SaleServices services;
 
     @PostMapping
-    public ResponseEntity<ProductSaleNewDTO> insert(@Valid @RequestBody ProductSaleNewDTO newSale, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<SaleDTO> insert(@Valid @RequestBody List<ProductSaleNewDTO> newSale, UriComponentsBuilder uriBuilder){
         Sale sale = services.save(newSale);
         URI uri = uriBuilder.path("/sale/{id}").buildAndExpand(sale.getId()).toUri();
         return ResponseEntity.created(uri).body(new SaleDTO(sale));

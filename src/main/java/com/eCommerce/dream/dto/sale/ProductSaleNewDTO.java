@@ -9,15 +9,14 @@ public class ProductSaleNewDTO {
 
     @NotBlank(message = "The quantity cannot be empty")
     private Integer quantity;
-    private BigDecimal amountSale;
+    private BigDecimal amountSaleProduct;
     @NotBlank(message = "The sale cannot be made without product")
     private Long product;
 
     public ProductSaleNewDTO() {}
 
-    public ProductSaleNewDTO(Integer quantity, BigDecimal amountSale, Long product) {
+    public ProductSaleNewDTO(Integer quantity, Long product) {
         this.quantity = quantity;
-        this.amountSale = amountSale;
         this.product = product;
     }
 
@@ -29,12 +28,12 @@ public class ProductSaleNewDTO {
         this.quantity = quantity;
     }
 
-    public BigDecimal getAmountSale() {
-        return amountSale;
+    public BigDecimal getAmountSaleProduct() {
+        return amountSaleProduct;
     }
 
-    public void setAmountSale(BigDecimal amountSale) {
-        this.amountSale = amountSale;
+    public void setAmountSaleProduct(BigDecimal amountSaleProduct) {
+        this.amountSaleProduct = amountSaleProduct;
     }
 
     public Long getProduct() {

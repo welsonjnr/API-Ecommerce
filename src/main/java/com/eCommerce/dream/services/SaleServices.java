@@ -16,7 +16,7 @@ public class SaleServices {
     @Autowired
     private SaleRepository repository;
 
-    public Sale save(SaleNewDTO objDto){
+    public Sale save(List<ProductSaleNewDTO> objDto){
 
         List<ProductSale> productSales = new ArrayList<>();
         objDto.getProducts().forEach(prod -> productSales.add(repository.findById(prod.getId()).get()));
