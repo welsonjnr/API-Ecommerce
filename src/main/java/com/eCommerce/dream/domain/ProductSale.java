@@ -17,6 +17,7 @@ public class ProductSale {
     private Long id;
     private Integer quantity;
     private BigDecimal preco;
+    private BigDecimal amountSaleProduct;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
@@ -59,6 +60,14 @@ public class ProductSale {
         this.preco = preco;
     }
 
+    public BigDecimal getAmountSaleProduct() {
+        return amountSaleProduct;
+    }
+
+    public void setAmountSaleProduct(BigDecimal amountSaleProduct) {
+        this.amountSaleProduct = amountSaleProduct;
+    }
+
     public Product getProduct() {
         return product;
     }
@@ -99,5 +108,4 @@ public class ProductSale {
         }
         return true;
     }
-
 }

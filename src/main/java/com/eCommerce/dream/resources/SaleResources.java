@@ -28,8 +28,8 @@ public class SaleResources {
     private SaleServices services;
 
     @PostMapping
-    public ResponseEntity<SaleDTO> insert(@Valid @RequestBody List<ProductSaleNewDTO> newSale, UriComponentsBuilder uriBuilder){
-        Sale sale = services.save(newSale);
+    public ResponseEntity<SaleDTO> insert(@Valid @RequestBody List<ProductSaleNewDTO> newSale, Long client, UriComponentsBuilder uriBuilder){
+        Sale sale = services.save(newSale, client);
         URI uri = uriBuilder.path("/sale/{id}").buildAndExpand(sale.getId()).toUri();
         return ResponseEntity.created(uri).body(new SaleDTO(sale));
     }
