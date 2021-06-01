@@ -1,6 +1,7 @@
 package com.eCommerce.dream.resources;
 
 import com.eCommerce.dream.domain.Sale;
+import com.eCommerce.dream.dto.sale.ClientSaleDTO;
 import com.eCommerce.dream.dto.sale.SaleDTO;
 import com.eCommerce.dream.dto.sale.ProductSaleNewDTO;
 import com.eCommerce.dream.repository.SaleRepository;
@@ -28,7 +29,7 @@ public class SaleResources {
     private SaleServices services;
 
     @PostMapping
-    public ResponseEntity<SaleDTO> insert(@Valid @RequestBody List<ProductSaleNewDTO> newSale, Long client, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<SaleDTO> insert(@Valid @RequestBody List<ProductSaleNewDTO> newSale, ClientSaleDTO client, UriComponentsBuilder uriBuilder){
         Sale sale = services.save(newSale, client);
         URI uri = uriBuilder.path("/sale/{id}").buildAndExpand(sale.getId()).toUri();
         return ResponseEntity.created(uri).body(new SaleDTO(sale));

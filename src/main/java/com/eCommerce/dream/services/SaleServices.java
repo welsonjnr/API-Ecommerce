@@ -2,6 +2,7 @@ package com.eCommerce.dream.services;
 
 import com.eCommerce.dream.domain.*;
 import com.eCommerce.dream.dto.address.AddressDTO;
+import com.eCommerce.dream.dto.sale.ClientSaleDTO;
 import com.eCommerce.dream.dto.sale.ProductSaleNewDTO;
 import com.eCommerce.dream.enums.SaleStatus;
 import com.eCommerce.dream.repository.ClientRepository;
@@ -33,12 +34,15 @@ public class SaleServices {
     @Autowired
     private SaleRepository repository;
 
-    public Sale save(List<ProductSaleNewDTO> objDto, Long client){
+    public Sale save(List<ProductSaleNewDTO> objDto, ClientSaleDTO client){
 
         List<ProductSale> productSales = new ArrayList<>();
         objDto.forEach(prod -> productSales.add(converterToProductSale(prod)));
 
-        Client cliSale = repositoryClient.findById(client).get();
+        Client cliSale = repositoryClient.findById(client.getIdClient()).get();
+
+        /*if(cliSale.getName().equals(client.getNameClient()) || cliSale.getNickName().equals(client.getNickName())){
+        }*/
 
         Sale sale = converterToSale(productSales, cliSale);
 
@@ -60,7 +64,8 @@ public class SaleServices {
     }
 
     private Sale converterToSale(List<ProductSale> productSale, Client client){
-        Double amount = productSale.stream().map(prod -> prod.getAmountSaleProduct()).reduce((prod, y) -> BigDecimal.valueOf(prod) + BigDecimal.valueOf(y)).orElse(0.0);
+
+        Long amount = productSale.stream().mapToLong(prod -> prod.getAmountSaleProduct().longValue()).sum();
 
         Sale newSale = new Sale(null, BigDecimal.valueOf(amount), LocalDateTime.now()
                 , SaleStatus.PENDING, client, productSale);

@@ -9,6 +9,8 @@ public class ProductSaleNewDTO {
     private Integer quantity;
     @NotBlank(message = "The price cannot be empty")
     private BigDecimal price;
+    @NotBlank(message = "The nameProduct cannot be empty")
+    private String nameProduct;
     @NotBlank(message = "The product cannot be made without product")
     private Long product;
 
@@ -33,6 +35,14 @@ public class ProductSaleNewDTO {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public String getNameProduct() {
+        return nameProduct;
+    }
+
+    public void setNameProduct(String nameProduct) {
+        this.nameProduct = nameProduct;
     }
 
     public Long getProduct() {
