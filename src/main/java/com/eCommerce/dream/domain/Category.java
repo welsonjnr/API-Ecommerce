@@ -19,19 +19,25 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    
-    @OneToMany(mappedBy = "category")
-    private List<Product> product;
-    
+
+
+    @ManyToOne
+    @JoinColumn(name="product_category_id")
+    private Product product;
+
     @OneToMany(mappedBy = "category")
     private List<Subcategories> subcategories;
 
     public Category() {}
 
-    public Category(Long id, String name, List<Product> product, List<Subcategories> subcategories) {
+    public Category(Long id, String name) {
         this.id = id;
         this.name = name;
-        this.product = product;
+    }
+
+    public Category(Long id, String name, List<Subcategories> subcategories) {
+        this.id = id;
+        this.name = name;
         this.subcategories = subcategories;
     }
 
@@ -51,11 +57,11 @@ public class Category {
         this.name = name;
     }
 
-    public List<Product> getProduct() {
+    public Product getProduct() {
         return product;
     }
 
-    public void setProduct(List<Product> product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
 

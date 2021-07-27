@@ -10,9 +10,7 @@ public class CategoryDetailDTO {
 
     private Long id;
     private String name;
-    private Integer totalProducts;
     private Integer totalSubcategories;
-    private List<Product> products;
     private List<Subcategories> subcategories;
 
     public CategoryDetailDTO(){}
@@ -20,9 +18,7 @@ public class CategoryDetailDTO {
     public CategoryDetailDTO(Category category) {
         this.id = category.getId();
         this.name = category.getName();
-        this.totalProducts = category.getProduct().size();
         this.totalSubcategories = category.getSubcategories().size();
-        this.products = category.getProduct();
         this.subcategories = category.getSubcategories();
     }
 
@@ -42,28 +38,12 @@ public class CategoryDetailDTO {
         this.name = name;
     }
 
-    public Integer getTotalProducts() {
-        return totalProducts;
-    }
-
-    public void setTotalProducts(Integer totalProducts) {
-        this.totalProducts = totalProducts;
-    }
-
     public Integer getTotalSubcategories() {
         return totalSubcategories;
     }
 
     public void setTotalSubcategories(Integer totalSubcategories) {
         this.totalSubcategories = totalSubcategories;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
     }
 
     public List<Subcategories> getSubcategories() {

@@ -21,23 +21,18 @@ public class Product {
     private String brand;
     private String unity;
     
-    @OneToMany(mappedBy = "product")
-    private List<Price> prices;
+    @OneToOne(mappedBy = "product")
+    private Price price;
     
-    @OneToMany(mappedBy = "product")
-    private List<Images> imgs;
-    
-    @ManyToOne
-    @JoinColumn(name="product_category_id")
-    private Category category;
+//    @OneToMany(mappedBy = "product")
+//    private List<Images> imgs;
 
-    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
-    private ProductSale productSale;
+    @OneToMany(mappedBy = "product")
+    private List<Category> category;
 
     public Product() {}
 
-    public Product(Long id, String name, String description, String shortDescription, String specifications, Integer quantity, Boolean available, String size, String brand, String unity, List<Price> prices, List<Images> imgs, Category category) {
+    public Product(Long id, String name, String description, String shortDescription, String specifications, Integer quantity, Boolean available, String size, String brand, String unity, Price price, List<Category> category) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -48,8 +43,18 @@ public class Product {
         this.size = size;
         this.brand = brand;
         this.unity = unity;
-        this.prices = prices;
-        this.imgs = imgs;
+        this.price = price;
+        this.category = category;
+    }
+
+    public Product(Long id, String name, String description, Integer quantity, Boolean available, String brand, Price price, List<Category> category) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.quantity = quantity;
+        this.available = available;
+        this.brand = brand;
+        this.price = price;
         this.category = category;
     }
 
@@ -133,27 +138,19 @@ public class Product {
         this.unity = unity;
     }
 
-    public List<Price> getPrices() {
-        return prices;
+    public Price getPrice() {
+        return price;
     }
 
-    public void setPrices(List<Price> prices) {
-        this.prices = prices;
+    public void setPrice(Price price) {
+        this.price = price;
     }
 
-    public List<Images> getImgs() {
-        return imgs;
-    }
-
-    public void setImgs(List<Images> imgs) {
-        this.imgs = imgs;
-    }
-
-    public Category getCategory() {
+    public List<Category> getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(List<Category> category) {
         this.category = category;
     }
 

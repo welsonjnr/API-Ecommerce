@@ -1,20 +1,14 @@
 
 package com.eCommerce.dream.config;
 
-import com.eCommerce.dream.domain.Address;
-import com.eCommerce.dream.domain.Client;
-import com.eCommerce.dream.domain.Country;
-import com.eCommerce.dream.domain.User;
-import com.eCommerce.dream.repository.AddressRepository;
-import com.eCommerce.dream.repository.ClientRepository;
-import com.eCommerce.dream.repository.CountryRepository;
+import com.eCommerce.dream.domain.*;
+import com.eCommerce.dream.repository.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.eCommerce.dream.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -36,8 +30,15 @@ public class TestConfig implements  CommandLineRunner{
     @Autowired
     private CountryRepository repositoryCount;
 
+    @Autowired
+    private CategoryRepository repositoryCate;
+
     @Override
     public void run(String... args) throws Exception {
+
+        repositoryCate.save(new Category( null ,"Comida"));
+        repositoryCate.save(new Category( null ,"Brinquedo"));
+
         List<Address> addrs = new ArrayList<>();
         Country country = new Country(null, "Brasil", "BR");
         Address address = new Address(null, "Rua principal", "S/N", "Setor central", "Em frente a loja", "76.160-000", "Goiânia",country);

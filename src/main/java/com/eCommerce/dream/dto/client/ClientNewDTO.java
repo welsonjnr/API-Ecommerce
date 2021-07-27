@@ -3,6 +3,7 @@ package com.eCommerce.dream.dto.client;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.*;
+import java.time.LocalDate;
 
 public class ClientNewDTO {
 
@@ -13,7 +14,7 @@ public class ClientNewDTO {
     @NotBlank @CPF
     private String cpf;
     @NotBlank(message = "Birthday cannot be null")
-    private String birthDate;
+    private LocalDate birthDate;
     private String nickName;
     private String description;
     @NotBlank(message = "Phone cannot be null")
@@ -38,7 +39,7 @@ public class ClientNewDTO {
 
     public ClientNewDTO(){}
 
-    public ClientNewDTO(String nameClient, String cpf, String birthDate, String nickName, String description, String street,
+    public ClientNewDTO(String nameClient, String cpf, LocalDate birthDate, String nickName, String description, String street,
                         String number, String sector, String complement, String cep, String city, String nameCountry) {
         this.nameClient = nameClient;
         this.cpf = cpf;
@@ -70,11 +71,11 @@ public class ClientNewDTO {
         this.cpf = cpf;
     }
 
-    public String getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 

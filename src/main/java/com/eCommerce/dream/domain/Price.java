@@ -1,15 +1,9 @@
 
 package com.eCommerce.dream.domain;
 
-import java.math.BigDecimal;
+import java.lang.Double;
 import java.util.Objects;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class Price {
@@ -17,22 +11,22 @@ public class Price {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private BigDecimal salePrice;
-    private BigDecimal costPrice;
+    private Double salePrice;
+    private Double costPrice;
     private Long percentagePrice;
     
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name="product_price_id")
     private Product product;
 
     public Price() {}
 
-    public Price(BigDecimal salePrice, BigDecimal costPrice) {
+    public Price(Double salePrice, Double costPrice) {
         this.salePrice = salePrice;
         this.costPrice = costPrice;
     }
 
-    public Price(Long id, BigDecimal salePrice, BigDecimal costPrice, Long percentagePrice, Product product) {
+    public Price(Long id, Double salePrice, Double costPrice, Long percentagePrice, Product product) {
         this.id = id;
         this.salePrice = salePrice;
         this.costPrice = costPrice;
@@ -48,19 +42,19 @@ public class Price {
         this.id = id;
     }
 
-    public BigDecimal getSalePrice() {
+    public Double getSalePrice() {
         return salePrice;
     }
 
-    public void setSalePrice(BigDecimal salePrice) {
+    public void setSalePrice(Double salePrice) {
         this.salePrice = salePrice;
     }
 
-    public BigDecimal getCostPrice() {
+    public Double getCostPrice() {
         return costPrice;
     }
 
-    public void setCostPrice(BigDecimal costPrice) {
+    public void setCostPrice(Double costPrice) {
         this.costPrice = costPrice;
     }
 

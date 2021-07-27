@@ -12,7 +12,6 @@ public class CategoryNewDTO {
     @NotBlank(message = "Category name cannot be null")
     private String name;
     private List<Long> subcategories;
-    private List<Long> products;
 
     public CategoryNewDTO(){}
 
@@ -20,10 +19,9 @@ public class CategoryNewDTO {
         this.name = name;
     }
 
-    public CategoryNewDTO(String name, List<Long> subcategories, List<Long> products) {
+    public CategoryNewDTO(String name, List<Long> subcategories) {
         this.name = name;
         this.subcategories = subcategories;
-        this.products = products;
     }
 
     public String getName() {
@@ -42,11 +40,4 @@ public class CategoryNewDTO {
         this.subcategories = subcategories;
     }
 
-    public List<Long> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Long> products) {
-        this.products = products;
-    }
 }
