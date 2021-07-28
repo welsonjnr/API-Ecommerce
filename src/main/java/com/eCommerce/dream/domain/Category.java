@@ -1,6 +1,9 @@
 
 package com.eCommerce.dream.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
@@ -20,8 +23,8 @@ public class Category {
     private Long id;
     private String name;
 
-
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name="product_category_id")
     private Product product;
 

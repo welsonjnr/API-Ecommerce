@@ -1,6 +1,9 @@
 
 package com.eCommerce.dream.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
@@ -26,7 +29,8 @@ public class Product {
     
 //    @OneToMany(mappedBy = "product")
 //    private List<Images> imgs;
-
+    
+    @JsonManagedReference
     @OneToMany(mappedBy = "product")
     private List<Category> category;
 
