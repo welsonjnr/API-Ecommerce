@@ -29,7 +29,7 @@ public class Product {
     
 //    @OneToMany(mappedBy = "product")
 //    private List<Images> imgs;
-    
+
     @JsonManagedReference
     @OneToMany(mappedBy = "product")
     private List<Category> category;

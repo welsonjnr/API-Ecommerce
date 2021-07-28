@@ -5,14 +5,14 @@ import com.eCommerce.dream.domain.ProductSale;
 import com.eCommerce.dream.domain.Sale;
 
 import javax.validation.constraints.NotBlank;
-import java.math.BigDecimal;
+import java.lang.Double;
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class SaleDTO {
 
     private Integer totalProducts;
-    private BigDecimal amountSale;
+    private Double amountSale;
     private LocalDateTime dataSale;
     @NotBlank(message = "The sale cannot be made without products")
     private List<ProductSale> products;
@@ -27,11 +27,11 @@ public class SaleDTO {
         this.totalProducts = sale.getProductSalesId().size();
     }
 
-    public BigDecimal getAmountSale() {
+    public Double getAmountSale() {
         return amountSale;
     }
 
-    public void setAmountSale(BigDecimal amountSale) {
+    public void setAmountSale(Double amountSale) {
         this.amountSale = amountSale;
     }
 

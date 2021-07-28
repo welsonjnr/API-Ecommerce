@@ -3,7 +3,7 @@ package com.eCommerce.dream.domain;
 
 import com.eCommerce.dream.enums.SaleStatus;
 
-import java.math.BigDecimal;
+import java.lang.Double;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +16,7 @@ public class Sale {
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private BigDecimal amount;
+    private Double amount;
     private LocalDateTime dataSale;
 
     @Enumerated(value = EnumType.STRING)
@@ -31,7 +31,7 @@ public class Sale {
 
     public Sale() {}
 
-    public Sale(Long id, BigDecimal amount, LocalDateTime dataSale, SaleStatus saleStatus, Client client, List<ProductSale> productSaleId) {
+    public Sale(Long id, Double amount, LocalDateTime dataSale, SaleStatus saleStatus, Client client, List<ProductSale> productSaleId) {
         this.id = id;
         this.amount = amount;
         this.dataSale = dataSale;
@@ -48,11 +48,11 @@ public class Sale {
         this.id = id;
     }
 
-    public BigDecimal getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(BigDecimal amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 

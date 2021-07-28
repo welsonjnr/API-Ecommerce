@@ -5,7 +5,7 @@
  */
 package com.eCommerce.dream.domain;
 
-import java.math.BigDecimal;
+import java.lang.Double;
 import java.util.Objects;
 import javax.persistence.*;
 
@@ -16,8 +16,8 @@ public class ProductSale {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Integer quantity;
-    private BigDecimal preco;
-    private BigDecimal amountSaleProduct;
+    private Double preco;
+    private Double amountSaleProduct;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
@@ -29,7 +29,7 @@ public class ProductSale {
 
     public ProductSale() {}
 
-    public ProductSale(Long id, Integer quantity, BigDecimal preco, Product product) {
+    public ProductSale(Long id, Integer quantity, Double preco, Product product) {
         this.id = id;
         this.quantity = quantity;
         this.preco = preco;
@@ -52,19 +52,19 @@ public class ProductSale {
         this.quantity = quantity;
     }
 
-    public BigDecimal getPreco() {
+    public Double getPreco() {
         return preco;
     }
 
-    public void setPreco(BigDecimal preco) {
+    public void setPreco(Double preco) {
         this.preco = preco;
     }
 
-    public BigDecimal getAmountSaleProduct() {
+    public Double getAmountSaleProduct() {
         return amountSaleProduct;
     }
 
-    public void setAmountSaleProduct(BigDecimal amountSaleProduct) {
+    public void setAmountSaleProduct(Double amountSaleProduct) {
         this.amountSaleProduct = amountSaleProduct;
     }
 
