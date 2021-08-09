@@ -2,6 +2,7 @@
 package com.eCommerce.dream.domain;
 
 import com.eCommerce.dream.enums.SaleStatus;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.lang.Double;
 import java.time.LocalDateTime;
@@ -26,6 +27,7 @@ public class Sale {
     @JoinColumn(name="client")
     private Client client;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "sale")
     private List<ProductSale> productSaleId;
 

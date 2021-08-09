@@ -37,9 +37,9 @@ public class SaleServices {
 
         Client clientForSale = repositoryClient.findById(objDto.get(0).getIdClient()).get();
 
-        if (clientForSale.getName() != objDto.get(0).getNameClient()){
-            throw new IllegalArgumentException("O Cliente não está de acordo com o banco de dados!. Tente arrumar no banco" +
-                    "de dados");
+        if (!clientForSale.getName().equals(objDto.get(0).getNameClient())){
+            throw new IllegalArgumentException("O Cliente não está de acordo com o banco de dados!. Tente arrumar os dados no banco" +
+                    " de dados");
         }
 
         Sale sale = converterToSale(productsForSale, clientForSale);
@@ -54,7 +54,7 @@ public class SaleServices {
         ProductSale productSale = new ProductSale();
         Product product = repositoryProduct.findById(productSaleForSale.getIdProduct()).get();
 
-        if(product.getId().equals(productSaleForSale.getIdProduct()) && product.getName().equals(productSaleForSale)){
+        if(product.getId().equals(productSaleForSale.getIdProduct()) && product.getName().equals(productSaleForSale.getNameProduct())){
             productSale.setProduct(product);
         }else{
             throw new IllegalArgumentException("O Produto não está de acordo com o banco de dados!. Tente arrumar no banco" +
@@ -74,9 +74,7 @@ public class SaleServices {
 
         Double amount = productSale.stream().mapToDouble(prod -> prod.getAmountSaleProduct().longValue()).sum();
 
-        Sale newSale = new Sale(null, amount, LocalDateTime.now(),SaleStatus.PENDING, client, productSale);
-
-        return newSale;
+        return new Sale(null, amount, LocalDateTime.now(),SaleStatus.PENDING, client, productSale);
     }
 
 }

@@ -5,6 +5,9 @@
  */
 package com.eCommerce.dream.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.lang.Double;
 import java.util.Objects;
 import javax.persistence.*;
@@ -24,6 +27,7 @@ public class ProductSale {
     private Product product;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name="sale_id")
     private Sale sale;
 
