@@ -8,6 +8,9 @@ import com.eCommerce.dream.repository.ProductRepository;
 import com.eCommerce.dream.repository.ProductSaleRepository;
 import com.eCommerce.dream.repository.SaleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.lang.Double;
@@ -29,6 +32,11 @@ public class SaleServices {
 
     @Autowired
     private SaleRepository repository;
+
+    public Page<Sale> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
+        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
+        return repository.findAll(pageRequest);
+    }
 
     public Sale save(List<NewSaleDTO> objDto){
 
@@ -73,8 +81,11 @@ public class SaleServices {
     private Sale converterToSale(List<ProductSale> productSale, Client client){
 
         Double amount = productSale.stream().mapToDouble(prod -> prod.getAmountSaleProduct().longValue()).sum();
+        Sale sale = new Sale(null, amount, LocalDateTime.now(),SaleStatus.PENDING, client, productSale);
 
-        return new Sale(null, amount, LocalDateTime.now(),SaleStatus.PENDING, client, productSale);
+        productSale.forEach(prodsSale -> prodsSale.setSale(sale));
+
+        return sale;
     }
 
 }

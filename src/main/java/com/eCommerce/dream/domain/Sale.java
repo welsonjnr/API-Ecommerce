@@ -23,7 +23,7 @@ public class Sale {
     @Enumerated(value = EnumType.STRING)
     private SaleStatus saleStatus;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name="client")
     private Client client;
 

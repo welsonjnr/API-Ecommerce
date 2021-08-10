@@ -15,16 +15,24 @@ public class SaleDTO {
     private Double amountSale;
     private LocalDateTime dataSale;
     @NotBlank(message = "The sale cannot be made without products")
-    private List<ProductSale> products;
+    private List<ProductSale> productsSale;
     @NotBlank(message = "The sale cannot be made without a client")
     private Client client;
 
     public SaleDTO(Sale sale) {
-        this.products = sale.getProductSalesId();
+        this.productsSale = sale.getProductSalesId();
         this.client = sale.getClient();
         this.amountSale = sale.getAmount();
         this.dataSale = sale.getDataSale();
         this.totalProducts = sale.getProductSalesId().size();
+    }
+
+    public Integer getTotalProducts() {
+        return totalProducts;
+    }
+
+    public void setTotalProducts(Integer totalProducts) {
+        this.totalProducts = totalProducts;
     }
 
     public Double getAmountSale() {
@@ -43,12 +51,12 @@ public class SaleDTO {
         this.dataSale = dataSale;
     }
 
-    public List<ProductSale> getProducts() {
-        return products;
+    public List<ProductSale> getProductsSale() {
+        return productsSale;
     }
 
-    public void setProducts(List<ProductSale> products) {
-        this.products = products;
+    public void setProductsSale(List<ProductSale> productsSale) {
+        this.productsSale = productsSale;
     }
 
     public Client getClient() {
@@ -58,4 +66,5 @@ public class SaleDTO {
     public void setClient(Client client) {
         this.client = client;
     }
+
 }

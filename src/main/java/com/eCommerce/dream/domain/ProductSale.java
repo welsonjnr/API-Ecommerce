@@ -22,7 +22,7 @@ public class ProductSale {
     private Double preco;
     private Double amountSaleProduct;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "product_id")
     private Product product;
 
