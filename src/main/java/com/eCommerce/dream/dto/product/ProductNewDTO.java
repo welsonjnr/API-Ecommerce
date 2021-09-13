@@ -4,9 +4,8 @@ import com.eCommerce.dream.domain.Category;
 import com.eCommerce.dream.domain.Images;
 import com.eCommerce.dream.domain.Price;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-import java.math.BigDecimal;
+import javax.validation.constraints.*;
+import java.lang.Double;
 import java.util.List;
 
 public class ProductNewDTO {
@@ -16,32 +15,34 @@ public class ProductNewDTO {
     @Size(min = 4, message = "The customer's name must be at least 4 characters")
     private String name;
     @NotBlank(message = "Product description cannot be null")
-    @Size(min = 15, message = "The Product description must be at least 15 characters")
+    @Size(min = 7, message = "The Product description must be at least 7 characters")
     private String description;
     @NotBlank(message = "Product shotDescription cannot be null")
     @Size(min = 10, message = "The Product short description must be at least 10 characters")
     private String shorDescription;
     private String specifications;
-    @NotBlank(message = "Product quantity cannot be null")
+    @Min(value = 1, message= "Product quantity cannot be null")
     private Integer quantity;
     private String size;
     @NotBlank(message = "Product brand cannot be null")
     private String brand;
     private Boolean available = Boolean.TRUE;
     private String unity;
-    @NotBlank(message = "Product category cannot be null")
-    private Category category;
-    @NotBlank(message = "Product prices cannot be empty")
-    private BigDecimal salePrice;
-    @NotBlank(message = "Product price cost cannot be empty")
-    private BigDecimal costPrice;
-    @NotBlank(message = "Product imgs cannot be null")
-    private List<Images> imgs;
+
+    //Category
+    @NotBlank(message = "Category cannot be null")
+    private String nameCategory;
+
+
+    //Price
+    @Min(value = 0L, message = "Product prices cannot be empty")
+    private Double salePrice;
+    @Min(value = 0L, message = "Product price cost cannot be empty")
+    private Double costPrice;
 
     public ProductNewDTO() {}
 
-    public ProductNewDTO(String name, String description, String shorDescription, String specifications, Integer quantity,
-                         String size, String brand, Boolean available, String unity, Category category, BigDecimal costPrice, BigDecimal salePrice) {
+    public ProductNewDTO(String name, String description, String shorDescription, String specifications, Integer quantity, String size, String brand, Boolean available, String unity, String nameCategory, Double salePrice, Double costPrice) {
         this.name = name;
         this.description = description;
         this.shorDescription = shorDescription;
@@ -51,26 +52,20 @@ public class ProductNewDTO {
         this.brand = brand;
         this.available = available;
         this.unity = unity;
-        this.category = category;
-        this.costPrice = costPrice;
+        this.nameCategory = nameCategory;
         this.salePrice = salePrice;
+        this.costPrice = costPrice;
     }
 
-    public ProductNewDTO(String name, String description, String shorDescription, String specifications, Integer quantity, String size,
-                         String brand, Boolean available, String unity, Category category, BigDecimal costPrice, BigDecimal salePrice, List<Images> imgs) {
+    public ProductNewDTO(String name, String description, String shorDescription, Integer quantity, String brand, Boolean available, Double salePrice, Double costPrice) {
         this.name = name;
         this.description = description;
         this.shorDescription = shorDescription;
-        this.specifications = specifications;
         this.quantity = quantity;
-        this.size = size;
         this.brand = brand;
         this.available = available;
-        this.unity = unity;
-        this.category = category;
-        this.costPrice = costPrice;
         this.salePrice = salePrice;
-        this.imgs = imgs;
+        this.costPrice = costPrice;
     }
 
     public String getName() {
@@ -145,35 +140,33 @@ public class ProductNewDTO {
         this.unity = unity;
     }
 
-    public Category getCategory() {
-        return category;
+    public String getNameCategory() {
+        return nameCategory;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setNameCategory(String nameCategory) {
+        this.nameCategory = nameCategory;
     }
 
-    public BigDecimal getSalePrice() {
+    public Double getSalePrice() {
         return salePrice;
     }
 
-    public void setSalePrice(BigDecimal salePrice) {
+    public void setSalePrice(Double salePrice) {
         this.salePrice = salePrice;
     }
 
-    public BigDecimal getCostPrice() {
+    public Double getCostPrice() {
         return costPrice;
     }
 
-    public void setCostPrice(BigDecimal costPrice) {
+    public void setCostPrice(Double costPrice) {
         this.costPrice = costPrice;
     }
 
-    public List<Images> getImgs() {
-        return imgs;
-    }
+//    public List<Images> getImgs() {
+//        return imgs;
+//    }
 
-    public void setImgs(List<Images> imgs) {
-        this.imgs = imgs;
-    }
+ //   public void setImgs(List<Images> imgs) {this.imgs = imgs;}
 }

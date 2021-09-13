@@ -17,11 +17,9 @@ public class ProductDetailDTO {
     private String brand;
     private String unity;
 
-    private List<Price> prices;
+    private Price price;
 
-    private List<Images> imgs;
-
-    private Category category;
+    private List<Category> category;
 
     private ProductSale productSale;
 
@@ -38,8 +36,7 @@ public class ProductDetailDTO {
         this.size = prod.getSize();
         this.brand = prod.getBrand();
         this.unity = prod.getUnity();
-        this.prices = prod.getPrices();
-        this.imgs = prod.getImgs();
+        this.price = prod.getPrice();
         this.category = prod.getCategory();
     }
 
@@ -123,27 +120,19 @@ public class ProductDetailDTO {
         this.unity = unity;
     }
 
-    public List<Price> getPrices() {
-        return prices;
+    public Price getPrice() {
+        return price;
     }
 
-    public void setPrices(List<Price> prices) {
-        this.prices = prices;
+    public void setPrice(Price price) {
+        this.price = price;
     }
 
-    public List<Images> getImgs() {
-        return imgs;
-    }
-
-    public void setImgs(List<Images> imgs) {
-        this.imgs = imgs;
-    }
-
-    public Category getCategory() {
+    public List<Category> getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(List<Category> category) {
         this.category = category;
     }
 

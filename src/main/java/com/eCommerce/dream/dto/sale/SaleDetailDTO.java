@@ -4,37 +4,29 @@ import com.eCommerce.dream.domain.Client;
 import com.eCommerce.dream.domain.Product;
 import com.eCommerce.dream.domain.ProductSale;
 import com.eCommerce.dream.domain.Sale;
-import com.eCommerce.dream.dto.product.ProductDTO;
+import com.eCommerce.dream.enums.SaleStatus;
+import com.eCommerce.dream.repository.ProductSaleRepository;
 
-import javax.validation.constraints.NotBlank;
-import java.lang.Double;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
-public class SaleDTO {
+public class SaleDetailDTO {
 
     private Integer totalProducts;
     private Double amountSale;
     private LocalDateTime dataSale;
-    @NotBlank(message = "The sale cannot be made without products")
-    private List<ProductSale> productsSale;
-    @NotBlank(message = "The sale cannot be made without a client")
+    private List<ProductSale> products;
     private Client client;
+    private SaleStatus saleStatus;
 
-    public SaleDTO(Sale sale) {
-        this.productsSale = sale.getProductSalesId();
+    public SaleDetailDTO(Sale sale, ProductSaleRepository repository) {
+        this.products = sale.getProductSalesId();
         this.client = sale.getClient();
         this.amountSale = sale.getAmount();
         this.dataSale = sale.getDataSale();
         this.totalProducts = sale.getProductSalesId().size();
-    }
-
-    public Integer getTotalProducts() {
-        return totalProducts;
-    }
-
-    public void setTotalProducts(Integer totalProducts) {
-        this.totalProducts = totalProducts;
+        this.saleStatus = sale.getSaleStatus();
     }
 
     public Double getAmountSale() {
@@ -53,12 +45,12 @@ public class SaleDTO {
         this.dataSale = dataSale;
     }
 
-    public List<ProductSale> getProductsSale() {
-        return productsSale;
+    public List<ProductSale> getProducts() {
+        return products;
     }
 
-    public void setProductsSale(List<ProductSale> productsSale) {
-        this.productsSale = productsSale;
+    public void setProducts(List<ProductSale> products) {
+        this.products = products;
     }
 
     public Client getClient() {
@@ -67,6 +59,22 @@ public class SaleDTO {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public Integer getTotalProducts() {
+        return totalProducts;
+    }
+
+    public void setTotalProducts(Integer totalProducts) {
+        this.totalProducts = totalProducts;
+    }
+
+    public SaleStatus getSaleStatus() {
+        return saleStatus;
+    }
+
+    public void setSaleStatus(SaleStatus saleStatus) {
+        this.saleStatus = saleStatus;
     }
 
 }

@@ -5,7 +5,10 @@
  */
 package com.eCommerce.dream.domain;
 
-import java.math.BigDecimal;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import java.lang.Double;
 import java.util.Objects;
 import javax.persistence.*;
 
@@ -16,23 +19,32 @@ public class ProductSale {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Integer quantity;
-    private BigDecimal preco;
-    private BigDecimal amountSaleProduct;
+    private Double preco;
+    private Double amountSaleProduct;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "product_id")
     private Product product;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name="sale_id")
     private Sale sale;
 
     public ProductSale() {}
 
-    public ProductSale(Long id, Integer quantity, BigDecimal preco, Product product) {
+    public ProductSale(Long id, Integer quantity, Double preco, Product product) {
         this.id = id;
         this.quantity = quantity;
         this.preco = preco;
+        this.product = product;
+    }
+
+    public ProductSale(Long id, Integer quantity, Double preco, Double amountSaleProduct, Product product) {
+        this.id = id;
+        this.quantity = quantity;
+        this.preco = preco;
+        this.amountSaleProduct = amountSaleProduct;
         this.product = product;
     }
 
@@ -52,20 +64,16 @@ public class ProductSale {
         this.quantity = quantity;
     }
 
-    public BigDecimal getPreco() {
+    public Double getPreco() {
         return preco;
     }
 
-    public void setPreco(BigDecimal preco) {
+    public void setPreco(Double preco) {
         this.preco = preco;
     }
 
-    public BigDecimal getAmountSaleProduct() {
+    public Double getAmountSaleProduct() {
         return amountSaleProduct;
-    }
-
-    public void setAmountSaleProduct(BigDecimal amountSaleProduct) {
-        this.amountSaleProduct = amountSaleProduct;
     }
 
     public Product getProduct() {
@@ -83,6 +91,7 @@ public class ProductSale {
     public void setSale(Sale sale) {
         this.sale = sale;
     }
+
 
     @Override
     public int hashCode() {

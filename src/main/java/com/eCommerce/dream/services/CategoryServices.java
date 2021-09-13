@@ -32,13 +32,17 @@ public class CategoryServices {
     }
 
     public Category save(CategoryNewDTO objDto){
-        List<Product> products = new ArrayList<>();
-        objDto.getProducts().forEach(prod -> products.add(repositoryProduct.findById(prod).get()));
 
-        List<Subcategories> subcategories = new ArrayList<>();
-        objDto.getSubcategories().forEach(sub -> subcategories.add(repositorySubcategories.findById(sub).get()));
+        Category category = new Category();
 
-        Category category = new Category(null, objDto.getName(), products, subcategories);
+        if (objDto.getSubcategories().isEmpty()){
+            category = new Category(null, objDto.getName());
+        }
+        else {
+            List<Subcategories> subcategories = new ArrayList<>();
+            objDto.getSubcategories().forEach(sub -> subcategories.add(repositorySubcategories.findById(sub).get()));
+            category.setSubcategories(subcategories);
+        }
 
         repositoryCategory.save(category);
 

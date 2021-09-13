@@ -1,5 +1,6 @@
 package com.eCommerce.dream.dto.product;
 
+import com.eCommerce.dream.domain.Category;
 import com.eCommerce.dream.domain.Images;
 import com.eCommerce.dream.domain.Product;
 
@@ -13,9 +14,9 @@ public class ProductDTO {
     private String shotDescription;
     private String brand;
     private Boolean available;
-    private BigDecimal priceSale;
-    private List<Images> imgs;
-    private String nameCategory;
+    private Double priceSale;
+//    private List<Images> imgs;
+    private List<Category> namesCategory;
 
     public ProductDTO() {}
 
@@ -25,9 +26,9 @@ public class ProductDTO {
         this.shotDescription = prod.getShortDescription();
         this.brand = prod.getBrand();
         this.available = prod.getAvailable();
-        this.priceSale = prod.getPrices().get(prod.getPrices().size()).getSalePrice();
-        this.imgs = prod.getImgs();
-        this.nameCategory = prod.getCategory().getName();
+        this.priceSale = prod.getPrice().getSalePrice();
+//        this.imgs = prod.getImgs();
+        this.namesCategory = prod.getCategory();
     }
 
     public Long getId() {
@@ -70,14 +71,14 @@ public class ProductDTO {
         this.available = available;
     }
 
-    public BigDecimal getPriceSale() {
+    public Double getPriceSale() {
         return priceSale;
     }
 
-    public void setPriceSale(BigDecimal priceSale) {
+    public void setPriceSale(Double priceSale) {
         this.priceSale = priceSale;
     }
-
+/*
     public List<Images> getImgs() {
         return imgs;
     }
@@ -85,12 +86,13 @@ public class ProductDTO {
     public void setImgs(List<Images> imgs) {
         this.imgs = imgs;
     }
+*/
 
-    public String getNameCategory() {
-        return nameCategory;
+    public List<Category> getNamesCategory() {
+        return namesCategory;
     }
 
-    public void setNameCategory(String nameCategory) {
-        this.nameCategory = nameCategory;
+    public void setNamesCategory(List<Category> namesCategory) {
+        this.namesCategory = namesCategory;
     }
 }

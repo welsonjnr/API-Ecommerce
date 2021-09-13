@@ -32,18 +32,14 @@ public class ProductServices {
     private CategoryRepository repositoryCategory;
 
     public Product save(ProductNewDTO objDto){
-        List<Price> prices = new ArrayList<>();
         Price price = new Price(objDto.getCostPrice(), objDto.getSalePrice());
-        prices.add(price);
-        repositoryPrice.saveAll(prices);
+        repositoryPrice.save(price);
 
-        List<Images> imgs = objDto.getImgs();
-        repositoryImages.saveAll(imgs);
+        List<Category> categories = new ArrayList<>();
+        Category category = repositoryCategory.findByName(objDto.getNameCategory());
+        categories.add(category);
 
-        Category category = repositoryCategory.findById(objDto.getCategory().getId()).get();
-
-        Product product = new Product(null, objDto.getName(), objDto.getDescription(), objDto.getShorDescription(), objDto.getSpecifications(), objDto.getQuantity(), objDto.getAvailable(),
-                objDto.getSize(), objDto.getBrand(), objDto.getUnity(), prices, imgs, category);
+        Product product = new Product(null, objDto.getName(), objDto.getDescription(), objDto.getShorDescription(), objDto.getSpecifications(), objDto.getQuantity(), objDto.getAvailable(), objDto.getSize(), objDto.getBrand(), objDto.getUnity(), price, categories);
 
         repository.save(product);
 
