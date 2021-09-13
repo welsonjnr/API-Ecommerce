@@ -87,6 +87,7 @@ public class ProductDTO {
         this.imgs = imgs;
     }
 */
+
     public List<Category> getNamesCategory() {
         return namesCategory;
     }

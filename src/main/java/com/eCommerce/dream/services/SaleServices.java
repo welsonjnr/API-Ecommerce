@@ -2,6 +2,7 @@ package com.eCommerce.dream.services;
 
 import com.eCommerce.dream.domain.*;
 import com.eCommerce.dream.dto.sale.NewSaleDTO;
+import com.eCommerce.dream.dto.sale.ProductSaleDTO;
 import com.eCommerce.dream.enums.SaleStatus;
 import com.eCommerce.dream.repository.ClientRepository;
 import com.eCommerce.dream.repository.ProductRepository;
@@ -16,7 +17,9 @@ import org.springframework.stereotype.Service;
 import java.lang.Double;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SaleServices {
@@ -38,54 +41,40 @@ public class SaleServices {
         return repository.findAll(pageRequest);
     }
 
-    public Sale save(List<NewSaleDTO> objDto){
+    public Sale save(NewSaleDTO sale){
 
-        List<ProductSale> productsForSale = new ArrayList<>();
-        objDto.forEach(prod -> productsForSale.add(converterToProductSale(prod)));
+        //Products
+        List<ProductSale> productsForSale = new LinkedList<>();
+        sale.getProducts().forEach(prod -> productsForSale.add(converterToProductSale(prod)));
 
-        Client clientForSale = repositoryClient.findById(objDto.get(0).getIdClient()).get();
+        //Clients
+        Client clientForSale = findClientForSale(sale.getIdClient(), sale.getNameClient(), sale.getCpf());
 
-        if (!clientForSale.getName().equals(objDto.get(0).getNameClient())){
-            throw new IllegalArgumentException("O Cliente não está de acordo com o banco de dados!. Tente arrumar os dados no banco" +
-                    " de dados");
-        }
-
-        Sale sale = converterToSale(productsForSale, clientForSale);
-        repository.save(sale);
-
-        return sale;
+        Sale newSale = converterToSale(productsForSale, clientForSale);
+        repository.save(newSale);
+        productsForSale.forEach(productSale -> productSale.setSale(newSale));
+        productsForSale.forEach(prod -> repositoryProductSale.save(prod));
+        return newSale;
     }
 
-    public ProductSale converterToProductSale(NewSaleDTO productSaleForSale){
+    private ProductSale converterToProductSale(ProductSaleDTO objDto){
 
-        //Product
-        ProductSale productSale = new ProductSale();
-        Product product = repositoryProduct.findById(productSaleForSale.getIdProduct()).get();
+        Product product = repositoryProduct.findById(objDto.getIdProduct()).get();
+        Double amount = objDto.getPriceSale() * objDto.getQuantity();
 
-        if(product.getId().equals(productSaleForSale.getIdProduct()) && product.getName().equals(productSaleForSale.getNameProduct())){
-            productSale.setProduct(product);
-        }else{
-            throw new IllegalArgumentException("O Produto não está de acordo com o banco de dados!. Tente arrumar no banco" +
-                    "de dados");
-        }
-
-        productSale.setQuantity(productSaleForSale.getQuantity());
-        productSale.setPreco(productSaleForSale.getPrice());
-        productSale.setAmountSaleProduct(productSaleForSale.getPrice() * productSaleForSale.getQuantity());
-
-        repositoryProductSale.save(productSale);
-
+        ProductSale productSale = new ProductSale(null, objDto.getQuantity(), objDto.getPriceSale(), amount, product);
         return productSale;
     }
 
-    private Sale converterToSale(List<ProductSale> productSale, Client client){
-
-        Double amount = productSale.stream().mapToDouble(prod -> prod.getAmountSaleProduct().longValue()).sum();
-        Sale sale = new Sale(null, amount, LocalDateTime.now(),SaleStatus.PENDING, client, productSale);
-
-        productSale.forEach(prodsSale -> prodsSale.setSale(sale));
-
+    private Sale converterToSale(List<ProductSale> productsForSale, Client client){
+        Double amount = productsForSale.stream().mapToDouble(prod -> prod.getAmountSaleProduct().longValue()).sum();
+        Sale sale = new Sale(null, amount, LocalDateTime.now(), SaleStatus.PENDING, client, productsForSale);
         return sale;
     }
 
+    private Client findClientForSale(Long idClient, String nameClient, String cpf){
+        Client client = repositoryClient.findById(idClient).get();
+
+        return client;
+    }
 }

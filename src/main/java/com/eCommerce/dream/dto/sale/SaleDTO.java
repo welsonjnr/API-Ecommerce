@@ -1,8 +1,10 @@
 package com.eCommerce.dream.dto.sale;
 
 import com.eCommerce.dream.domain.Client;
+import com.eCommerce.dream.domain.Product;
 import com.eCommerce.dream.domain.ProductSale;
 import com.eCommerce.dream.domain.Sale;
+import com.eCommerce.dream.dto.product.ProductDTO;
 
 import javax.validation.constraints.NotBlank;
 import java.lang.Double;

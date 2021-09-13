@@ -55,7 +55,7 @@ public class SaleResources {
     }
 
     @PostMapping
-    public ResponseEntity<SaleDTO> insert(@Valid @RequestBody List<NewSaleDTO> newSaleDto, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<SaleDTO> insert(@Valid @RequestBody NewSaleDTO newSaleDto, UriComponentsBuilder uriBuilder){
         Sale sale = services.save(newSaleDto);
         URI uri = uriBuilder.path("/sale/{id}").buildAndExpand(sale.getId()).toUri();
         return ResponseEntity.created(uri).body(new SaleDTO(sale));

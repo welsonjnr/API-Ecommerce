@@ -40,6 +40,14 @@ public class ProductSale {
         this.product = product;
     }
 
+    public ProductSale(Long id, Integer quantity, Double preco, Double amountSaleProduct, Product product) {
+        this.id = id;
+        this.quantity = quantity;
+        this.preco = preco;
+        this.amountSaleProduct = amountSaleProduct;
+        this.product = product;
+    }
+
     public Long getId() {
         return id;
     }
@@ -68,10 +76,6 @@ public class ProductSale {
         return amountSaleProduct;
     }
 
-    public void setAmountSaleProduct(Double amountSaleProduct) {
-        this.amountSaleProduct = amountSaleProduct;
-    }
-
     public Product getProduct() {
         return product;
     }
@@ -87,6 +91,7 @@ public class ProductSale {
     public void setSale(Sale sale) {
         this.sale = sale;
     }
+
 
     @Override
     public int hashCode() {

@@ -1,6 +1,7 @@
 package com.eCommerce.dream.dto.sale;
 
 import com.eCommerce.dream.domain.Client;
+import com.eCommerce.dream.domain.Product;
 import com.eCommerce.dream.domain.ProductSale;
 import com.eCommerce.dream.domain.Sale;
 import com.eCommerce.dream.enums.SaleStatus;
@@ -20,7 +21,7 @@ public class SaleDetailDTO {
     private SaleStatus saleStatus;
 
     public SaleDetailDTO(Sale sale, ProductSaleRepository repository) {
-        this.products = getSaleProduts(sale.getProductSalesId(), repository);
+        this.products = sale.getProductSalesId();
         this.client = sale.getClient();
         this.amountSale = sale.getAmount();
         this.dataSale = sale.getDataSale();
@@ -76,11 +77,4 @@ public class SaleDetailDTO {
         this.saleStatus = saleStatus;
     }
 
-    public List<ProductSale> getSaleProduts(List<ProductSale> productsSale, ProductSaleRepository repository){
-
-        List<ProductSale> productsSold = new ArrayList<>();
-        productsSale.forEach(prod -> productsSold.add(repository.findById(prod.getId()).get()));
-
-        return productsSold;
-    }
 }
