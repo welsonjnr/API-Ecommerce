@@ -57,4 +57,23 @@ public class CategoryResources {
         URI uri = uriBuilder.path("/categorys/{id}").buildAndExpand(category.getId()).toUri();
         return ResponseEntity.created(uri).body(new CategoryDTO(category));
     }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id){
+        return repository.findById(id)
+                .map(category -> {
+                    repository.deleteById(id);
+                    return ResponseEntity.ok().build();
+                }).orElse(ResponseEntity.notFound().build());
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity update(@PathVariable ("id") Long id, @RequestBody CategoryNewDTO categoryToUpdate){
+        return repository.findById(id)
+                .map(category -> {
+                    category.setName(categoryToUpdate.getName());
+                    Category updated = repository.save(category);
+                    return ResponseEntity.ok().body(updated);
+                }).orElse(ResponseEntity.notFound().build());
+    }
 }

@@ -9,6 +9,9 @@ import com.eCommerce.dream.repository.ImagesRepository;
 import com.eCommerce.dream.repository.PriceRepository;
 import com.eCommerce.dream.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -30,6 +33,11 @@ public class ProductServices {
 
     @Autowired
     private CategoryRepository repositoryCategory;
+
+    public Page<Product> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
+        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
+        return repository.findAll(pageRequest);
+    }
 
     public Product save(ProductNewDTO objDto){
         Price price = new Price(objDto.getCostPrice(), objDto.getSalePrice());
