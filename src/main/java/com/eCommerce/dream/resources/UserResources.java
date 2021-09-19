@@ -17,7 +17,7 @@ import java.util.Optional;
 public class UserResources {
 
     @Autowired
-    UserRepository repository;
+    private UserRepository repository;
 
     @GetMapping(value="/{id}")
     public ResponseEntity<User> findById(@PathVariable Long id) throws ObjectNotFoundException {
@@ -26,6 +26,4 @@ public class UserResources {
                 ResponseEntity.ok().body(user.get()) :
                 ResponseEntity.notFound().build();
         }
-
-
 }
