@@ -1,12 +1,9 @@
 package com.eCommerce.dream.resources;
 
 import com.eCommerce.dream.domain.Address;
-import com.eCommerce.dream.domain.Sale;
 import com.eCommerce.dream.dto.address.AddressDTO;
 import com.eCommerce.dream.dto.address.AddressDetailDTO;
 import com.eCommerce.dream.dto.address.NewAddressDTO;
-import com.eCommerce.dream.dto.sale.NewSaleDTO;
-import com.eCommerce.dream.dto.sale.SaleDTO;
 import com.eCommerce.dream.repository.AddressRepository;
 import com.eCommerce.dream.services.AddressServices;
 import javassist.tools.rmi.ObjectNotFoundException;
