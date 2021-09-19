@@ -1,6 +1,8 @@
 
 package com.eCommerce.dream.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.lang.Double;
 import java.util.Objects;
 import javax.persistence.*;
@@ -14,9 +16,9 @@ public class Price {
     private Double salePrice;
     private Double costPrice;
     private Long percentagePrice;
-    
-    @OneToOne
-    @JoinColumn(name="product_price_id")
+
+    @JsonBackReference
+    @OneToOne(mappedBy = "price")
     private Product product;
 
     public Price() {}

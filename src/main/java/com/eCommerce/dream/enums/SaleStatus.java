@@ -6,6 +6,7 @@ public enum SaleStatus {
     CONFIRMED,
     SEPARATION,
     DELIVERED,
-    CANCELED
+    CANCELED,
+    DELETED
 
 }

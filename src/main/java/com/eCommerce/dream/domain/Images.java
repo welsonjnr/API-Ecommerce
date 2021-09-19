@@ -1,6 +1,9 @@
 
 package com.eCommerce.dream.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
@@ -18,6 +21,7 @@ public class Images {
     @Column(length = 1000)
     private byte[] images;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name="product_imgs_id")
     private Product product;

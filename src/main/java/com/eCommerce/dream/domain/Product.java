@@ -23,12 +23,15 @@ public class Product {
     private String size;
     private String brand;
     private String unity;
-    
-    @OneToOne(mappedBy = "product")
+
+    @JsonManagedReference
+    @OneToOne
+    @JoinColumn(name = "price_id")
     private Price price;
-    
-//    @OneToMany(mappedBy = "product")
-//    private List<Images> imgs;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "product")
+    private List<Images> imgs;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "product")
@@ -36,7 +39,8 @@ public class Product {
 
     public Product() {}
 
-    public Product(Long id, String name, String description, String shortDescription, String specifications, Integer quantity, Boolean available, String size, String brand, String unity, Price price, List<Category> category) {
+    public Product(Long id, String name, String description, String shortDescription, String specifications,
+                   Integer quantity, Boolean available, String size, String brand, String unity, Price price, List<Category> category) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -148,6 +152,14 @@ public class Product {
 
     public void setPrice(Price price) {
         this.price = price;
+    }
+
+    public List<Images> getImgs() {
+        return imgs;
+    }
+
+    public void setImgs(List<Images> imgs) {
+        this.imgs = imgs;
     }
 
     public List<Category> getCategory() {

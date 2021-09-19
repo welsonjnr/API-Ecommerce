@@ -17,16 +17,13 @@ import java.util.Optional;
 public class UserResources {
 
     @Autowired
-    UserRepository repository;
+    private UserRepository repository;
 
     @GetMapping(value="/{id}")
     public ResponseEntity<User> findById(@PathVariable Long id) throws ObjectNotFoundException {
         Optional<User> user = repository.findById(id);
-        User userDTo = user.get();
-
-        return (userDTo != null) ?
-                ResponseEntity.ok().body(userDTo) :
+        return (!user.isEmpty()) ?
+                ResponseEntity.ok().body(user.get()) :
                 ResponseEntity.notFound().build();
-    }
-
+        }
 }

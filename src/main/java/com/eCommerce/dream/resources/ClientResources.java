@@ -2,10 +2,13 @@
 package com.eCommerce.dream.resources;
 
 
+import com.eCommerce.dream.domain.Category;
 import com.eCommerce.dream.domain.Client;
+import com.eCommerce.dream.dto.category.CategoryNewDTO;
 import com.eCommerce.dream.dto.client.ClientDTO;
 import com.eCommerce.dream.dto.client.ClientDetailDTO;
 import com.eCommerce.dream.dto.client.ClientNewDTO;
+import com.eCommerce.dream.dto.client.ClientUpdateDTO;
 import com.eCommerce.dream.repository.ClientRepository;
 
 import java.net.URI;
@@ -35,10 +38,9 @@ public class ClientResources {
     @GetMapping(value="/{id}")
     public ResponseEntity<ClientDetailDTO> findById(@PathVariable Long id) throws ObjectNotFoundException{
         Optional<Client> client = repository.findById(id);
-        ClientDetailDTO clientDTO = new ClientDetailDTO(client.get());
 
-           return (clientDTO != null) ?
-           ResponseEntity.ok().body(clientDTO) :
+           return (!client.isEmpty()) ?
+           ResponseEntity.ok().body(new ClientDetailDTO(client.get())) :
            ResponseEntity.notFound().build();
     }
 
@@ -58,5 +60,29 @@ public class ClientResources {
         Client client = services.save(newClient);
         URI uri = uriBuilder.path("/client/{id}").buildAndExpand(client.getId()).toUri();
         return ResponseEntity.created(uri).body(new ClientDTO(client));
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id){
+        return repository.findById(id)
+                .map(client -> {
+                    repository.deleteById(id);
+                    return ResponseEntity.ok().build();
+                }).orElse(ResponseEntity.notFound().build());
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity update(@PathVariable ("id") Long id, @RequestBody ClientUpdateDTO clientToUpdate){
+        return repository.findById(id)
+                .map(client -> {
+                    client.setName(clientToUpdate.getNameClient());
+                    client.setCpf(clientToUpdate.getCpfClient());
+                    client.setNickName(clientToUpdate.getNickNameClient());
+                    client.setBirthDate(clientToUpdate.getBirthDateClient());
+                    client.setPhone(clientToUpdate.getPhoneClient());
+                    client.setDescription(clientToUpdate.getDescriptionClient());
+                    Client updated = repository.save(client);
+                    return ResponseEntity.ok().body(updated);
+                }).orElse(ResponseEntity.notFound().build());
     }
 }

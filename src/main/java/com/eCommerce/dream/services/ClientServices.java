@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +40,8 @@ public class ClientServices {
         Country country = repositoryCountry.findByNameContaining(objDto.getNameCountry()).get();
         Address address = new Address(null, objDto.getStreet(), objDto.getNumber(), objDto.getSector(), objDto.getComplement(), objDto.getCep(), objDto.getCity(), country);
         addresses.add(address);
-        Client client = new Client(null, objDto.getNameClient(), objDto.getCpf(), objDto.getBirthDate(), objDto.getNickName(), objDto.getDescription(), objDto.getPhone(),addresses);
+        LocalDate birthday = takeBirthday(objDto.getDayOfBirthDate(), objDto.getMonthOfBirthDate(), objDto.getYearOfBirthDate());
+        Client client = new Client(null, objDto.getNameClient(), objDto.getCpf(), birthday, objDto.getNickName(), objDto.getDescription(), objDto.getPhone(),addresses);
         addresses.forEach(adr -> adr.setClient(client));
         repositoryClient.save(client);
         repositoryAddress.save(address);
@@ -48,13 +50,19 @@ public class ClientServices {
 
     public Client save(ClientNewDTO objDto){
         List<Address> addresses = new ArrayList<>();
+
         Country country = repositoryCountry.findByNameContaining(objDto.getNameCountry()).get();
         Address address = new Address(null, objDto.getStreet(), objDto.getNumber(), objDto.getSector(), objDto.getComplement(), objDto.getCep(), objDto.getCity(), country);
         addresses.add(address);
-        Client client = new Client(null, objDto.getNameClient(), objDto.getCpf(), objDto.getBirthDate(), objDto.getNickName(), objDto.getDescription(), objDto.getPhone(), addresses);
+        LocalDate birthday = takeBirthday(objDto.getDayOfBirthDate(), objDto.getMonthOfBirthDate(), objDto.getYearOfBirthDate());
+        Client client = new Client(null, objDto.getNameClient(), objDto.getCpf(), birthday, objDto.getNickName(), objDto.getDescription(), objDto.getPhone(), addresses);
         addresses.forEach(adr -> address.setClient(client));
         repositoryClient.save(client);
         repositoryAddress.save(address);
         return client;
+    }
+
+    private LocalDate takeBirthday(int dayOfBirthDate, int monthOfBirthDate, int yearOfBirthDate){
+        return LocalDate.of(yearOfBirthDate, monthOfBirthDate, dayOfBirthDate);
     }
 }

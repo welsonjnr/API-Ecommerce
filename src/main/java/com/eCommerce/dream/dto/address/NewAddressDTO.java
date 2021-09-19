@@ -1,31 +1,20 @@
-package com.eCommerce.dream.dto.client;
+package com.eCommerce.dream.dto.address;
 
 import org.hibernate.validator.constraints.br.CPF;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
-public class ClientNewDTO {
+public class NewAddressDTO {
 
     //Client
-    @NotBlank(message = "Customer name cannot be null")
-    @Size(min = 4, message = "The customer's name must be at least 4 characters")
+    @NotNull(message = "Customer id cannot be Null or Empty")
+    private Long idClient;
+    @NotEmpty(message = "Customer name cannot be Null or Empty")
     private String nameClient;
     @NotBlank @CPF
     private String cpf;
-    @Min(value = 1, message = "The day of Birthday cannot be null")
-    @Max(value = 31, message = "The days cannot be more than 31 days")
-    private int dayOfBirthDate;
-    @Min(value = 1, message = "The month of Birthday cannot be null")
-    @Max(value = 12, message = "The month cannot be more than 12 months")
-    private int monthOfBirthDate;
-    @Min(value = 1930, message = "The year of Birthday cannot be null")
-    private int yearOfBirthDate;
-
-    private String nickName;
-    private String description;
-    @NotBlank(message = "Phone cannot be null")
-    @Size(min = 11, max = 11)
-    private String phone;
 
     //Address
     @NotBlank(message = "Address street cannot be null")
@@ -43,7 +32,16 @@ public class ClientNewDTO {
     @NotBlank(message = "Country cannot be null")
     private String nameCountry;
 
-    public ClientNewDTO(){}
+    public NewAddressDTO() {
+    }
+
+    public Long getIdClient() {
+        return idClient;
+    }
+
+    public void setIdClient(Long idClient) {
+        this.idClient = idClient;
+    }
 
     public String getNameClient() {
         return nameClient;
@@ -59,54 +57,6 @@ public class ClientNewDTO {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
-    }
-
-    public int getDayOfBirthDate() {
-        return dayOfBirthDate;
-    }
-
-    public void setDayOfBirthDate(int dayOfBirthDate) {
-        this.dayOfBirthDate = dayOfBirthDate;
-    }
-
-    public int getMonthOfBirthDate() {
-        return monthOfBirthDate;
-    }
-
-    public void setMonthOfBirthDate(int monthOfBirthDate) {
-        this.monthOfBirthDate = monthOfBirthDate;
-    }
-
-    public int getYearOfBirthDate() {
-        return yearOfBirthDate;
-    }
-
-    public void setYearOfBirthDate(int yearOfBirthDate) {
-        this.yearOfBirthDate = yearOfBirthDate;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     public String getStreet() {

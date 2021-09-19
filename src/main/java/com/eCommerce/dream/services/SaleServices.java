@@ -74,7 +74,6 @@ public class SaleServices {
 
     private Client findClientForSale(Long idClient, String nameClient, String cpf){
         Client client = repositoryClient.findById(idClient).get();
-
         return client;
     }
 }

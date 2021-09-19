@@ -26,9 +26,7 @@ public class SubcategoriesServices {
     public Subcategories save(SubcategoriesDTO objDto){
 
         Category category = repositoryCat.findById(objDto.getId()).get();
-
         Subcategories subcategories = new Subcategories(null, objDto.getName(), category);
-
         repository.save(subcategories);
 
         return subcategories;

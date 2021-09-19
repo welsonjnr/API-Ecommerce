@@ -8,6 +8,7 @@ public class AddressDTO {
     private String street;
     private String number;
     private String sector;
+    private String complement;
     private String cep;
     private String city;
     private String country;
@@ -19,9 +20,19 @@ public class AddressDTO {
         this.street = address.getStreet();
         this.number = address.getNumber();
         this.sector = address.getSector();
+        this.complement = address.getComplement();
         this.cep = address.getCep();
         this.city = address.getCity();
         this.country = address.getCountry().getAbbreviation();
+    }
+
+    public AddressDTO(String street, String number, String sector, String complement, String cep, String city) {
+        this.street = street;
+        this.number = number;
+        this.sector = sector;
+        this.complement = complement;
+        this.cep = cep;
+        this.city = city;
     }
 
     public Long getId() {
@@ -54,6 +65,14 @@ public class AddressDTO {
 
     public void setSector(String sector) {
         this.sector = sector;
+    }
+
+    public String getComplement() {
+        return complement;
+    }
+
+    public void setComplement(String complement) {
+        this.complement = complement;
     }
 
     public String getCep() {
