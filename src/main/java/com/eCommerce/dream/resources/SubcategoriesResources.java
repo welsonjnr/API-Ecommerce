@@ -32,10 +32,8 @@ public class SubcategoriesResources {
     @GetMapping(value="/{id}")
     public ResponseEntity<SubcategoriesDTO> findById(@PathVariable Long id) throws ObjectNotFoundException {
         Optional<Subcategories> subcategories = repository.findById(id);
-        SubcategoriesDTO subcategoriesDTO = new SubcategoriesDTO(subcategories.get());
-
-        return (subcategoriesDTO != null) ?
-                ResponseEntity.ok().body(subcategoriesDTO) :
+        return (!subcategories.isEmpty()) ?
+                ResponseEntity.ok().body(new SubcategoriesDTO(subcategories.get())) :
                 ResponseEntity.notFound().build();
     }
 

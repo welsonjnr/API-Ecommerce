@@ -37,10 +37,8 @@ public class SaleResources {
     @GetMapping(value="/{id}")
     public ResponseEntity<SaleDetailDTO> findById(@PathVariable Long id) throws ObjectNotFoundException{
         Optional<Sale> sale = repository.findById(id);
-        SaleDetailDTO saleDetailDTO = new SaleDetailDTO(sale.get(), productSaleRepository);
-
-        return (saleDetailDTO != null) ?
-                ResponseEntity.ok().body(saleDetailDTO) :
+        return (!sale.isEmpty()) ?
+                ResponseEntity.ok().body(new SaleDetailDTO(sale.get(), productSaleRepository)) :
                 ResponseEntity.notFound().build();
     }
 
