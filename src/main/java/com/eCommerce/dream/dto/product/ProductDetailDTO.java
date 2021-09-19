@@ -1,7 +1,10 @@
 package com.eCommerce.dream.dto.product;
 
 import com.eCommerce.dream.domain.*;
+import com.eCommerce.dream.repository.CategoryRepository;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ProductDetailDTO {
@@ -16,12 +19,9 @@ public class ProductDetailDTO {
     private String size;
     private String brand;
     private String unity;
-
-    private Price price;
-
-    private List<Category> category;
-
-    private ProductSale productSale;
+    private Double costPrice;
+    private Double salePrice;
+    private List<Images> images;
 
     public ProductDetailDTO() {}
 
@@ -36,8 +36,9 @@ public class ProductDetailDTO {
         this.size = prod.getSize();
         this.brand = prod.getBrand();
         this.unity = prod.getUnity();
-        this.price = prod.getPrice();
-        this.category = prod.getCategory();
+        this.costPrice = prod.getPrice().getCostPrice();
+        this.salePrice = prod.getPrice().getSalePrice();
+        this.images = prod.getImgs();
     }
 
     public Long getId() {
@@ -120,27 +121,28 @@ public class ProductDetailDTO {
         this.unity = unity;
     }
 
-    public Price getPrice() {
-        return price;
+    public Double getCostPrice() {
+        return costPrice;
     }
 
-    public void setPrice(Price price) {
-        this.price = price;
+    public void setCostPrice(Double costPrice) {
+        this.costPrice = costPrice;
     }
 
-    public List<Category> getCategory() {
-        return category;
+    public Double getSalePrice() {
+        return salePrice;
     }
 
-    public void setCategory(List<Category> category) {
-        this.category = category;
+    public void setSalePrice(Double salePrice) {
+        this.salePrice = salePrice;
     }
 
-    public ProductSale getProductSale() {
-        return productSale;
+    public List<Images> getImages() {
+        return images;
     }
 
-    public void setProductSale(ProductSale productSale) {
-        this.productSale = productSale;
+    public void setImages(List<Images> images) {
+        this.images = images;
     }
+
 }

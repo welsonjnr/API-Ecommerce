@@ -5,6 +5,7 @@ import com.eCommerce.dream.domain.Sale;
 import com.eCommerce.dream.dto.sale.NewSaleDTO;
 import com.eCommerce.dream.dto.sale.SaleDTO;
 import com.eCommerce.dream.dto.sale.SaleDetailDTO;
+import com.eCommerce.dream.enums.SaleStatus;
 import com.eCommerce.dream.repository.ProductSaleRepository;
 import com.eCommerce.dream.repository.SaleRepository;
 import com.eCommerce.dream.services.SaleServices;
@@ -59,5 +60,15 @@ public class SaleResources {
         Sale sale = services.save(newSaleDto);
         URI uri = uriBuilder.path("/sale/{id}").buildAndExpand(sale.getId()).toUri();
         return ResponseEntity.created(uri).body(new SaleDTO(sale));
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id){
+        return repository.findById(id)
+                .map(sale -> {
+                    sale.setSaleStatus(SaleStatus.DELETED);
+                    repository.save(sale);
+                    return ResponseEntity.ok().build();
+                }).orElse(ResponseEntity.notFound().build());
     }
 }

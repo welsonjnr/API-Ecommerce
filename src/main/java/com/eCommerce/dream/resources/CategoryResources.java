@@ -33,10 +33,9 @@ public class CategoryResources {
     @GetMapping(value="/{id}")
     public ResponseEntity<CategoryDetailDTO> findById(@PathVariable Long id) throws ObjectNotFoundException {
         Optional<Category> caterory = repository.findById(id);
-        CategoryDetailDTO categoryDetailDTO = new CategoryDetailDTO(caterory.get());
 
-        return (categoryDetailDTO != null) ?
-                ResponseEntity.ok().body(categoryDetailDTO) :
+        return (!caterory.isEmpty()) ?
+                ResponseEntity.ok().body(new CategoryDetailDTO(caterory.get())) :
                 ResponseEntity.notFound().build();
     }
 

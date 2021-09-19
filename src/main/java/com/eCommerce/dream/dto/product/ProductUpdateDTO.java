@@ -1,12 +1,10 @@
 package com.eCommerce.dream.dto.product;
 
-import com.eCommerce.dream.dto.image.ImagesDTO;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
-import javax.validation.constraints.*;
-import java.lang.Double;
-import java.util.List;
-
-public class ProductNewDTO {
+public class ProductUpdateDTO {
 
     //Product
     @NotBlank(message = "Product name cannot be null")
@@ -24,45 +22,15 @@ public class ProductNewDTO {
     private String size;
     @NotBlank(message = "Product brand cannot be null")
     private String brand;
-    private Boolean available = Boolean.TRUE;
     private String unity;
 
-    //Category
-    @NotBlank(message = "Category cannot be null")
-    private String nameCategory;
-
-    //Price
     @Min(value = 0L, message = "Product prices cannot be empty")
     private Double salePrice;
     @Min(value = 0L, message = "Product price cost cannot be empty")
     private Double costPrice;
 
-    public ProductNewDTO() {}
 
-    public ProductNewDTO(String name, String description, String shorDescription, String specifications, Integer quantity, String size, String brand, Boolean available, String unity, String nameCategory, Double salePrice, Double costPrice) {
-        this.name = name;
-        this.description = description;
-        this.shorDescription = shorDescription;
-        this.specifications = specifications;
-        this.quantity = quantity;
-        this.size = size;
-        this.brand = brand;
-        this.available = available;
-        this.unity = unity;
-        this.nameCategory = nameCategory;
-        this.salePrice = salePrice;
-        this.costPrice = costPrice;
-    }
-
-    public ProductNewDTO(String name, String description, String shorDescription, Integer quantity, String brand, Boolean available, Double salePrice, Double costPrice) {
-        this.name = name;
-        this.description = description;
-        this.shorDescription = shorDescription;
-        this.quantity = quantity;
-        this.brand = brand;
-        this.available = available;
-        this.salePrice = salePrice;
-        this.costPrice = costPrice;
+    public ProductUpdateDTO() {
     }
 
     public String getName() {
@@ -121,28 +89,12 @@ public class ProductNewDTO {
         this.brand = brand;
     }
 
-    public Boolean getAvailable() {
-        return available;
-    }
-
-    public void setAvailable(Boolean available) {
-        this.available = available;
-    }
-
     public String getUnity() {
         return unity;
     }
 
     public void setUnity(String unity) {
         this.unity = unity;
-    }
-
-    public String getNameCategory() {
-        return nameCategory;
-    }
-
-    public void setNameCategory(String nameCategory) {
-        this.nameCategory = nameCategory;
     }
 
     public Double getSalePrice() {
@@ -160,5 +112,4 @@ public class ProductNewDTO {
     public void setCostPrice(Double costPrice) {
         this.costPrice = costPrice;
     }
-
 }

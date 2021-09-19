@@ -15,7 +15,7 @@ public class ProductDTO {
     private String brand;
     private Boolean available;
     private Double priceSale;
-//    private List<Images> imgs;
+    private List<Images> imgs;
     private List<Category> namesCategory;
 
     public ProductDTO() {}
@@ -27,7 +27,7 @@ public class ProductDTO {
         this.brand = prod.getBrand();
         this.available = prod.getAvailable();
         this.priceSale = prod.getPrice().getSalePrice();
-//        this.imgs = prod.getImgs();
+        this.imgs = prod.getImgs();
         this.namesCategory = prod.getCategory();
     }
 
@@ -78,7 +78,7 @@ public class ProductDTO {
     public void setPriceSale(Double priceSale) {
         this.priceSale = priceSale;
     }
-/*
+
     public List<Images> getImgs() {
         return imgs;
     }
@@ -86,7 +86,6 @@ public class ProductDTO {
     public void setImgs(List<Images> imgs) {
         this.imgs = imgs;
     }
-*/
 
     public List<Category> getNamesCategory() {
         return namesCategory;

@@ -4,12 +4,15 @@ import com.eCommerce.dream.domain.Category;
 import com.eCommerce.dream.domain.Client;
 import com.eCommerce.dream.domain.Product;
 import com.eCommerce.dream.dto.category.CategoryDTO;
+import com.eCommerce.dream.dto.category.CategoryNewDTO;
 import com.eCommerce.dream.dto.client.ClientDTO;
 import com.eCommerce.dream.dto.client.ClientDetailDTO;
 import com.eCommerce.dream.dto.client.ClientNewDTO;
 import com.eCommerce.dream.dto.product.ProductDTO;
 import com.eCommerce.dream.dto.product.ProductDetailDTO;
 import com.eCommerce.dream.dto.product.ProductNewDTO;
+import com.eCommerce.dream.dto.product.ProductUpdateDTO;
+import com.eCommerce.dream.repository.CategoryRepository;
 import com.eCommerce.dream.repository.ProductRepository;
 import com.eCommerce.dream.services.ProductServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,15 +33,17 @@ public class ProductResources {
     private ProductRepository repository;
 
     @Autowired
+    private CategoryRepository repositoryCat;
+
+    @Autowired
     private ProductServices services;
 
     @GetMapping(value="/{id}")
     public ResponseEntity<ProductDetailDTO> findById(@PathVariable Long id){
         Optional<Product> product = repository.findById(id);
-        ProductDetailDTO productDTO = new ProductDetailDTO(product.get());
 
-        return (productDTO != null) ?
-                ResponseEntity.ok().body(productDTO) :
+        return (!product.isEmpty()) ?
+                ResponseEntity.ok().body(new ProductDetailDTO(product.get())) :
                 ResponseEntity.notFound().build();
     }
 
@@ -46,7 +51,7 @@ public class ProductResources {
     public ResponseEntity<Page<ProductDTO>> findPage(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
-            @RequestParam(value = "orderBy", defaultValue = "nameProduct") String orderBy,
+            @RequestParam(value = "orderBy", defaultValue = "name") String orderBy,
             @RequestParam(value = "direction", defaultValue = "ASC" ) String direction) {
         Page<Product> list = services.findPage(page, linesPerPage, orderBy, direction);
         Page<ProductDTO> listDTO = list.map(obj -> new ProductDTO(obj));
@@ -68,5 +73,13 @@ public class ProductResources {
                     repository.save(product);
                     return ResponseEntity.ok().build();
                 }).orElse(ResponseEntity.notFound().build());
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity update(@PathVariable ("id") Long id, @RequestBody ProductUpdateDTO productUpdateDTO){
+        Product updated = services.update(productUpdateDTO, id);
+        ProductDetailDTO updatedDTO = new ProductDetailDTO(updated);
+
+        return ResponseEntity.ok().body(updatedDTO);
     }
 }
