@@ -62,7 +62,7 @@ public class TestConfig implements  CommandLineRunner{
         repositoryCount.save(country);
         repositoryCli.save(client);
         repositoryAddr.saveAll(addrs);
-        User user = new User(null, "user", "user@gmail.com", "password", client);
+        User user = new User(null, "user", "user@gmail.com", "$2a$10$XD1jNwYs/QoEobOcuHwHgOtALVx/fCQKsA3t0TbiaUE6ZRSD.TCg6", client);
         repositoryUser.save(user);
 
     }

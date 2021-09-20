@@ -1,26 +1,27 @@
 
 package com.eCommerce.dream.domain;
 
-import java.util.Objects;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.*;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class User{
+public class User implements UserDetails {
     
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String username;
+    private String login;
     @Email @NotNull
     private String email;
-    private String password;
+    private String key;
+    @Enumerated(EnumType.STRING)
+    private UserRole userRole;
     
     @OneToOne
     @JoinColumn(name="user_client_id")
@@ -28,11 +29,26 @@ public class User{
 
     public User() {}
 
-    public User(Long id, String username, String email, String password, Client client) {
+    public User(Long id, String login, String email, String key) {
         this.id = id;
-        this.username = username;
+        this.login = login;
         this.email = email;
-        this.password = password;
+        this.key = key;
+    }
+
+    public User(Long id, String login, String email, String key, UserRole userRole) {
+        this.id = id;
+        this.login = login;
+        this.email = email;
+        this.key = key;
+        this.userRole = userRole;
+    }
+
+    public User(Long id, String login, String email, String key, Client client) {
+        this.id = id;
+        this.login = login;
+        this.email = email;
+        this.key = key;
         this.client = client;
     }
 
@@ -44,12 +60,12 @@ public class User{
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getLogin() {
+        return login;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getEmail() {
@@ -60,12 +76,12 @@ public class User{
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getKey() {
+        return key;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public Client getClient() {
@@ -100,5 +116,40 @@ public class User{
         }
         return true;
     }
- 
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(userRole.name());
+        return Collections.singletonList(authority);
+    }
+
+    @Override
+    public String getPassword() {
+        return this.key;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.login;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
