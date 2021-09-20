@@ -27,4 +27,7 @@ public class UserService implements UserDetailsService {
                 user.get();
     }
 
+    public String singUpUser(User user){
+        return null;
+    }
 }

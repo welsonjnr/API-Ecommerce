@@ -1,6 +1,8 @@
 package com.eCommerce.dream.services;
 
+import com.eCommerce.dream.config.security.UserService;
 import com.eCommerce.dream.domain.User;
+import com.eCommerce.dream.domain.UserRole;
 import com.eCommerce.dream.dto.user.UserNewDTO;
 import com.eCommerce.dream.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,7 @@ public class UserServices {
 
     public User save(UserNewDTO objDto) {
         User user = new User(null, objDto.getLogin(), objDto.getEmail(),
-                new BCryptPasswordEncoder().encode(objDto.getKey()));
+                new BCryptPasswordEncoder().encode(objDto.getKey()), UserRole.USER);
         repository.save(user);
         return user;
     }
