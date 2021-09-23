@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.eCommerce.dream.services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +18,9 @@ import org.springframework.context.annotation.Profile;
 @Configuration
 @Profile("test")
 public class TestConfig implements  CommandLineRunner{
+
+    @Autowired
+    private UserServices serviceUser;
 
     @Autowired
     private UserRepository repositoryUser;
@@ -62,8 +66,17 @@ public class TestConfig implements  CommandLineRunner{
         repositoryCount.save(country);
         repositoryCli.save(client);
         repositoryAddr.saveAll(addrs);
-        User user = new User(null, "user", "user@gmail.com", "password", client);
-        repositoryUser.save(user);
+
+
+        Role role1 = new Role(null, "ROLE_USER");
+        Role role2 = new Role(null, "ROLE_MANAGER");
+        serviceUser.saveRole(role1);
+        serviceUser.saveRole(role2);
+        List<Role> roles = new ArrayList<>();
+        roles.add(role1);
+        roles.add(role2);
+
+        serviceUser.saveUser(new User(null, "usuario", "usuario@gmail.com","1234", roles));
 
     }
 }
