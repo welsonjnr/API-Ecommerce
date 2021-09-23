@@ -1,13 +1,10 @@
 
 package com.eCommerce.dream.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
@@ -21,6 +18,9 @@ public class User{
     @Email @NotNull
     private String email;
     private String password;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Role> roles = new ArrayList<>();
     
     @OneToOne
     @JoinColumn(name="user_client_id")
@@ -28,12 +28,20 @@ public class User{
 
     public User() {}
 
-    public User(Long id, String username, String email, String password, Client client) {
+    public User(Long id, String username, String email, String password) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
         this.client = client;
+    }
+
+    public User(Long id, String username, String email, String password, List<Role> roles) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
     }
 
     public Long getId() {
@@ -68,6 +76,14 @@ public class User{
         this.password = password;
     }
 
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
     public Client getClient() {
         return client;
     }
@@ -77,28 +93,15 @@ public class User{
     }
 
     @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 53 * hash + Objects.hashCode(this.id);
-        return hash;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) && username.equals(user.username) && Objects.equals(email, user.email) && password.equals(user.password) && roles.equals(user.roles) && Objects.equals(client, user.client);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final User other = (User) obj;
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return true;
+    public int hashCode() {
+        return Objects.hash(id, username, email, password, roles, client);
     }
- 
 }
