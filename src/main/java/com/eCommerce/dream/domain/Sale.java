@@ -22,9 +22,7 @@ public class Sale {
     @Enumerated(value = EnumType.STRING)
     private SaleStatus saleStatus;
 
-    @OneToOne
-    @JoinColumn(name="client")
-    private Client client;
+    private String client;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "sale")
@@ -32,12 +30,11 @@ public class Sale {
 
     public Sale() {}
 
-    public Sale(Long id, Double amount, LocalDateTime dataSale, SaleStatus saleStatus, Client client, List<ProductSale> productSaleId) {
+    public Sale(Long id, Double amount, LocalDateTime dataSale, SaleStatus saleStatus, String client, List<ProductSale> productSaleId) {
         this.id = id;
         this.amount = amount;
         this.dataSale = dataSale;
         this.saleStatus = saleStatus;
-        this.client = client;
         this.productSaleId = productSaleId;
     }
 
@@ -69,11 +66,11 @@ public class Sale {
 
     public void setSaleStatus(SaleStatus saleStatus) { this.saleStatus = saleStatus; }
 
-    public Client getClient() {
+    public String getClient() {
         return client;
     }
 
-    public void setClient(Client client) {
+    public void setClient(String client) {
         this.client = client;
     }
 

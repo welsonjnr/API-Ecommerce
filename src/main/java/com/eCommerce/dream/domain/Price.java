@@ -16,11 +16,6 @@ public class Price {
     private Double salePrice;
     private Double costPrice;
     private Long percentagePrice;
-
-    @JsonBackReference
-    @OneToOne(mappedBy = "price")
-    private Product product;
-
     public Price() {}
 
     public Price(Double salePrice, Double costPrice) {
@@ -28,12 +23,11 @@ public class Price {
         this.costPrice = costPrice;
     }
 
-    public Price(Long id, Double salePrice, Double costPrice, Long percentagePrice, Product product) {
+    public Price(Long id, Double salePrice, Double costPrice, Long percentagePrice) {
         this.id = id;
         this.salePrice = salePrice;
         this.costPrice = costPrice;
         this.percentagePrice = percentagePrice;
-        this.product = product;
     }
 
     public Long getId() {
@@ -66,14 +60,6 @@ public class Price {
 
     public void setPercentagePrice(Long percentagePrice) {
         this.percentagePrice = percentagePrice;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
     }
 
     @Override

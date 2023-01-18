@@ -2,6 +2,7 @@ package com.eCommerce.dream.resources;
 
 import com.eCommerce.dream.domain.Category;
 import com.eCommerce.dream.domain.Client;
+import com.eCommerce.dream.domain.Price;
 import com.eCommerce.dream.domain.Product;
 import com.eCommerce.dream.dto.category.CategoryDTO;
 import com.eCommerce.dream.dto.category.CategoryNewDTO;

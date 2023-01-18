@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import java.lang.Double;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -28,13 +27,11 @@ public class SaleServices {
     private ProductSaleRepository repositoryProductSale;
 
     @Autowired
-    private ClientRepository repositoryClient;
-
-    @Autowired
     private ProductRepository repositoryProduct;
 
     @Autowired
     private SaleRepository repository;
+
 
     public Page<Sale> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
@@ -47,10 +44,10 @@ public class SaleServices {
         List<ProductSale> productsForSale = new LinkedList<>();
         sale.getProducts().forEach(prod -> productsForSale.add(converterToProductSale(prod)));
 
-        //Clients
-        Client clientForSale = findClientForSale(sale.getIdClient(), sale.getNameClient(), sale.getCpf());
+        String clientForSale = sale.getNameClient();
 
         Sale newSale = converterToSale(productsForSale, clientForSale);
+        newSale.setClient(clientForSale);
         repository.save(newSale);
         productsForSale.forEach(productSale -> productSale.setSale(newSale));
         productsForSale.forEach(prod -> repositoryProductSale.save(prod));
@@ -66,14 +63,26 @@ public class SaleServices {
         return productSale;
     }
 
-    private Sale converterToSale(List<ProductSale> productsForSale, Client client){
+    private Sale converterToSale(List<ProductSale> productsForSale, String client){
         Double amount = productsForSale.stream().mapToDouble(prod -> prod.getAmountSaleProduct().longValue()).sum();
         Sale sale = new Sale(null, amount, LocalDateTime.now(), SaleStatus.PENDING, client, productsForSale);
         return sale;
     }
 
-    private Client findClientForSale(Long idClient, String nameClient, String cpf){
-        Client client = repositoryClient.findById(idClient).get();
-        return client;
+    public Sale update(Long id, NewSaleDTO updateSaleDto) {
+
+        //Products
+        List<ProductSale> productsForSale = new LinkedList<>();
+        updateSaleDto.getProducts().forEach(prod -> productsForSale.add(converterToProductSale(prod)));
+
+        String clientForSale = updateSaleDto.getNameClient();
+
+        Sale newSale = converterToSale(productsForSale, clientForSale);
+        newSale.setClient(clientForSale);
+        newSale.setId(id);
+        repository.save(newSale);
+        productsForSale.forEach(productSale -> productSale.setSale(newSale));
+        productsForSale.forEach(prod -> repositoryProductSale.save(prod));
+        return newSale;
     }
 }

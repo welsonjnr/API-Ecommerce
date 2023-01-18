@@ -44,20 +44,13 @@ public class ProductServices {
         Price price = new Price(objDto.getCostPrice(), objDto.getSalePrice());
         repositoryPrice.save(price);
 
-        List<Category> categories = new LinkedList<>();
-        Category category = repositoryCategory.findByName(objDto.getNameCategory());
-        categories.add(category);
-
+        Category category = repositoryCategory.findById(1L).get();
 
         Product product = new Product(null, objDto.getName(), objDto.getDescription(), objDto.getShorDescription(),
                 objDto.getSpecifications(), objDto.getQuantity(), objDto.getAvailable(), objDto.getSize(),
-                objDto.getBrand(), objDto.getUnity(), price, categories);
-
-
+                objDto.getBrand(), objDto.getUnity(), price, category);
 
         repository.save(product);
-
-
         return product;
     }
 
@@ -90,5 +83,4 @@ public class ProductServices {
 
         return null;
     }
-
 }

@@ -6,7 +6,7 @@ import com.eCommerce.dream.repository.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.eCommerce.dream.services.UserServices;
@@ -37,11 +37,17 @@ public class TestConfig implements  CommandLineRunner{
     @Autowired
     private CategoryRepository repositoryCate;
 
+    @Autowired
+    private ProductRepository repositoryProd;
+
+    @Autowired
+    private PriceRepository repositoryPrice;
+
     @Override
     public void run(String... args) throws Exception {
 
-        repositoryCate.save(new Category( null ,"Comida"));
-        repositoryCate.save(new Category( null ,"Brinquedo"));
+        Category category1 = repositoryCate.save(new Category( null ,"Comida"));
+        Category category2 = repositoryCate.save(new Category( null ,"Brinquedo"));
 
         List<Address> addrs = new ArrayList<>();
         Country country = new Country(null, "Brasil", "BR");
@@ -70,11 +76,50 @@ public class TestConfig implements  CommandLineRunner{
 
         Role role1 = new Role(null, "ROLE_USER");
         Role role2 = new Role(null, "ROLE_MANAGER");
+        Role role3 = new Role(null, "ROLE_ADMIN");
         serviceUser.saveRole(role1);
         serviceUser.saveRole(role2);
+        serviceUser.saveRole(role3);
         List<Role> roles = new ArrayList<>();
         roles.add(role1);
         roles.add(role2);
+        roles.add(role3);
+
+        Price price = new Price(18.99, 20.90);
+        repositoryPrice.save(price);
+
+        Product product = new Product();
+
+        product.setId(null);
+        product.setName("Burguer Bacon");
+        product.setDescription("Burguer Bacon, com dois hamburgures, dois bacons, pao e cebola.");
+        product.setShortDescription("O burguer bancon eo mais pedido");
+        product.setSpecifications("Nenhuma especificacao");
+        product.setQuantity(2);
+        product.setAvailable(true);
+        product.setSize("Familia");
+        product.setBrand("Paulao Burguer");
+        product.setUnity("Uma unidade");
+        product.setPrice(price);
+        product.setCategory(repositoryCate.findById(1L).get());
+
+        Product product2 = new Product();
+
+        product2.setId(null);
+        product2.setName("Jordan Duplo");
+        product2.setDescription("Burguer Bacon, com dois hamburgures, dois bacons, pao e cebola.");
+        product2.setShortDescription("O burguer bancon eo mais pedido");
+        product2.setSpecifications("Nenhuma especificacao");
+        product2.setQuantity(2);
+        product2.setAvailable(true);
+        product2.setSize("Familia");
+        product2.setBrand("Paulao Burguer");
+        product2.setUnity("Uma unidade");
+        product2.setPrice(price);
+        product2.setCategory(repositoryCate.findById(1L).get());
+
+        repositoryProd.save(product);
+        repositoryProd.save(product2);
 
         serviceUser.saveUser(new User(null, "usuario", "usuario@gmail.com","1234", roles));
 

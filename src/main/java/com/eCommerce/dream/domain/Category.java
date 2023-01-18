@@ -6,14 +6,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 @Entity
 public class Category {
@@ -22,11 +15,6 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-
-    @ManyToOne
-    @JsonBackReference
-    @JoinColumn(name="product_category_id")
-    private Product product;
 
     @OneToMany(mappedBy = "category")
     private List<Subcategories> subcategories;
@@ -59,15 +47,6 @@ public class Category {
     public void setName(String name) {
         this.name = name;
     }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
     public List<Subcategories> getSubcategories() {
         return subcategories;
     }

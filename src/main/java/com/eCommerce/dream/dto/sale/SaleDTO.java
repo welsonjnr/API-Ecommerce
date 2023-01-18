@@ -13,15 +13,17 @@ import java.util.List;
 
 public class SaleDTO {
 
+    private Long idSale;
     private Integer totalProducts;
     private Double amountSale;
     private LocalDateTime dataSale;
     @NotBlank(message = "The sale cannot be made without products")
     private List<ProductSale> productsSale;
     @NotBlank(message = "The sale cannot be made without a client")
-    private Client client;
+    private String client;
 
     public SaleDTO(Sale sale) {
+        this.idSale = sale.getId();
         this.productsSale = sale.getProductSalesId();
         this.client = sale.getClient();
         this.amountSale = sale.getAmount();
@@ -61,12 +63,19 @@ public class SaleDTO {
         this.productsSale = productsSale;
     }
 
-    public Client getClient() {
+    public String getClient() {
         return client;
     }
 
-    public void setClient(Client client) {
+    public void setClient(String client) {
         this.client = client;
     }
 
+    public Long getIdSale() {
+        return idSale;
+    }
+
+    public void setIdSale(Long idSale) {
+        this.idSale = idSale;
+    }
 }

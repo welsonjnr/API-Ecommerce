@@ -1,10 +1,10 @@
 package com.eCommerce.dream.resources;
 
-import com.eCommerce.dream.domain.Category;
 import com.eCommerce.dream.domain.Sale;
 import com.eCommerce.dream.dto.sale.NewSaleDTO;
 import com.eCommerce.dream.dto.sale.SaleDTO;
 import com.eCommerce.dream.dto.sale.SaleDetailDTO;
+import com.eCommerce.dream.dto.sale.SaleUpdateStatus;
 import com.eCommerce.dream.enums.SaleStatus;
 import com.eCommerce.dream.repository.ProductSaleRepository;
 import com.eCommerce.dream.repository.SaleRepository;
@@ -18,6 +18,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,6 +43,16 @@ public class SaleResources {
                 ResponseEntity.notFound().build();
     }
 
+    @GetMapping()
+    public ResponseEntity<List<SaleDetailDTO>> findById() throws ObjectNotFoundException{
+        List<SaleDetailDTO> salesDetails = new ArrayList<>();
+        repository.findAll().forEach(sale -> salesDetails.add(new SaleDetailDTO(sale)));
+
+        return (!salesDetails.isEmpty()) ?
+                ResponseEntity.ok().body(salesDetails) :
+                ResponseEntity.notFound().build();
+    }
+
     @GetMapping(value = "/page")
     public ResponseEntity<Page<SaleDTO>> findPage(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
@@ -54,10 +65,10 @@ public class SaleResources {
     }
 
     @PostMapping
-    public ResponseEntity<SaleDTO> insert(@Valid @RequestBody NewSaleDTO newSaleDto, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<SaleDetailDTO> insert(@Valid @RequestBody NewSaleDTO newSaleDto, UriComponentsBuilder uriBuilder){
         Sale sale = services.save(newSaleDto);
         URI uri = uriBuilder.path("/sale/{id}").buildAndExpand(sale.getId()).toUri();
-        return ResponseEntity.created(uri).body(new SaleDTO(sale));
+        return ResponseEntity.created(uri).body(new SaleDetailDTO(sale));
     }
 
     @DeleteMapping(value = "/{id}")
@@ -68,5 +79,21 @@ public class SaleResources {
                     repository.save(sale);
                     return ResponseEntity.ok().build();
                 }).orElse(ResponseEntity.notFound().build());
+    }
+
+    @PutMapping(value = "/updateStatus/{id}")
+    public ResponseEntity<?> updateStatus(@PathVariable Long id, @RequestBody SaleUpdateStatus statusInt){
+        return repository.findById(id)
+                .map(sale -> {
+                    sale.setSaleStatus(SaleStatus.getStatusByInt(statusInt.getNewSaleStatus()));
+                    return ResponseEntity.ok().body(new SaleDetailDTO(repository.save(sale)));
+                }).orElse(ResponseEntity.notFound().build());
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody NewSaleDTO newSaleDto, UriComponentsBuilder uriBuilder){
+        Sale sale = services.update(id, newSaleDto);
+        URI uri = uriBuilder.path("/sale/{id}").buildAndExpand(sale.getId()).toUri();
+        return ResponseEntity.created(uri).body(new SaleDetailDTO(sale));
     }
 }
