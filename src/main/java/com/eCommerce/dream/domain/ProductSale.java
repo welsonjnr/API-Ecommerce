@@ -21,6 +21,7 @@ public class ProductSale {
     private Integer quantity;
     private Double preco;
     private Double amountSaleProduct;
+    private String info;
 
     @OneToOne
     @JoinColumn(name = "product_id")
@@ -48,6 +49,16 @@ public class ProductSale {
         this.product = product;
     }
 
+    public ProductSale(Long id, Integer quantity, Double preco, Double amountSaleProduct, String info, Product product) {
+        this.id = id;
+        this.quantity = quantity;
+        this.preco = preco;
+        this.amountSaleProduct = amountSaleProduct;
+        this.info = info;
+        this.product = product;
+        this.sale = sale;
+    }
+
     public Long getId() {
         return id;
     }
@@ -62,6 +73,14 @@ public class ProductSale {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 
     public Double getPreco() {

@@ -19,14 +19,16 @@ public class ProductSaleDTO {
     private String nameProduct;
     @NotNull(message = "PriceSale of product cannot be Null or Empty")
     private Double priceSale;
+    private String info;
 
     public ProductSaleDTO() {}
 
-    public ProductSaleDTO(Integer quantity, Long idProduct, String nameProduct, Double priceSale) {
+    public ProductSaleDTO(Integer quantity, Long idProduct, String nameProduct, Double priceSale, String info) {
         this.quantity = quantity;
         this.idProduct = idProduct;
         this.nameProduct = nameProduct;
         this.priceSale = priceSale;
+        this.info = info;
     }
 
     public Integer getQuantity() {
@@ -59,5 +61,13 @@ public class ProductSaleDTO {
 
     public void setPriceSale(Double priceSale) {
         this.priceSale = priceSale;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 }

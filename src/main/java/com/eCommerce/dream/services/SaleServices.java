@@ -59,7 +59,7 @@ public class SaleServices {
         Product product = repositoryProduct.findById(objDto.getIdProduct()).get();
         Double amount = objDto.getPriceSale() * objDto.getQuantity();
 
-        ProductSale productSale = new ProductSale(null, objDto.getQuantity(), objDto.getPriceSale(), amount, product);
+        ProductSale productSale = new ProductSale(null, objDto.getQuantity(), objDto.getPriceSale(), amount, objDto.getInfo(),product);
         return productSale;
     }
 

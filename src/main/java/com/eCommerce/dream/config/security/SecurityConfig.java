@@ -1,8 +1,10 @@
 package com.eCommerce.dream.config.security;
 
+import com.eCommerce.dream.config.PropertiesConfiguration;
 import com.eCommerce.dream.config.filter.CustomAuthenticationFilter;
 import com.eCommerce.dream.config.filter.CustomAuthorizationFilter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,6 +23,8 @@ import static org.springframework.http.HttpMethod.POST;
 @Configuration @EnableWebSecurity @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private final PropertiesConfiguration propertiesConfiguration;
     private final UserDetailsService service;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -34,12 +38,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeRequests().antMatchers("/ecommerce/user/refresh").permitAll();
-        http.authorizeRequests().antMatchers("/h2-console/**").permitAll();
         http.authorizeRequests().antMatchers(GET, "/ecommerce/product/**").hasAnyAuthority("ROLE_USER");
         http.authorizeRequests().antMatchers(POST, "/ecommerce/product").hasAnyAuthority("ROLE_ADMIN");
         http.authorizeRequests().anyRequest().authenticated();
-        http.addFilter(new CustomAuthenticationFilter(authenticationManagerBean()));
-        http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilter(new CustomAuthenticationFilter(authenticationManagerBean(), propertiesConfiguration));
+        http.addFilterBefore(new CustomAuthorizationFilter(propertiesConfiguration), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean
