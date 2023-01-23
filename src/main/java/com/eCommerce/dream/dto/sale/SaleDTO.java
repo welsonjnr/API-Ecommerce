@@ -5,6 +5,7 @@ import com.eCommerce.dream.domain.Product;
 import com.eCommerce.dream.domain.ProductSale;
 import com.eCommerce.dream.domain.Sale;
 import com.eCommerce.dream.dto.product.ProductDTO;
+import com.eCommerce.dream.enums.SaleStatus;
 
 import javax.validation.constraints.NotBlank;
 import java.lang.Double;
@@ -17,6 +18,8 @@ public class SaleDTO {
     private Integer totalProducts;
     private Double amountSale;
     private LocalDateTime dataSale;
+
+    private SaleStatus saleStatus;
     @NotBlank(message = "The sale cannot be made without products")
     private List<ProductSale> productsSale;
     @NotBlank(message = "The sale cannot be made without a client")
@@ -28,6 +31,7 @@ public class SaleDTO {
         this.client = sale.getClient();
         this.amountSale = sale.getAmount();
         this.dataSale = sale.getDataSale();
+        this.saleStatus = sale.getSaleStatus();
         this.totalProducts = sale.getProductSalesId().size();
     }
 
@@ -77,5 +81,13 @@ public class SaleDTO {
 
     public void setIdSale(Long idSale) {
         this.idSale = idSale;
+    }
+
+    public SaleStatus getSaleStatus() {
+        return saleStatus;
+    }
+
+    public void setSaleStatus(SaleStatus saleStatus) {
+        this.saleStatus = saleStatus;
     }
 }

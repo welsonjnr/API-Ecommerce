@@ -14,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.io.InvalidObjectException;
 import java.lang.Double;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
@@ -64,7 +65,7 @@ public class SaleServices {
     }
 
     private Sale converterToSale(List<ProductSale> productsForSale, String client){
-        Double amount = productsForSale.stream().mapToDouble(prod -> prod.getAmountSaleProduct().longValue()).sum();
+        Double amount = productsForSale.stream().mapToDouble(prod -> prod.getAmountSaleProduct().doubleValue()).sum();
         Sale sale = new Sale(null, amount, LocalDateTime.now(), SaleStatus.PENDING, client, productsForSale);
         return sale;
     }
@@ -84,5 +85,11 @@ public class SaleServices {
         productsForSale.forEach(productSale -> productSale.setSale(newSale));
         productsForSale.forEach(prod -> repositoryProductSale.save(prod));
         return newSale;
+    }
+
+    public List<Sale> findSaleByNameClient(String nameClient) {
+        List<Sale> obj = repository.findByClientContaining(nameClient);
+
+        return obj;
     }
 }

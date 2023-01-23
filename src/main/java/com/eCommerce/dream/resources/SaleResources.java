@@ -43,13 +43,13 @@ public class SaleResources {
                 ResponseEntity.notFound().build();
     }
 
-    @GetMapping()
-    public ResponseEntity<List<SaleDetailDTO>> findById() throws ObjectNotFoundException{
-        List<SaleDetailDTO> salesDetails = new ArrayList<>();
-        repository.findAll().forEach(sale -> salesDetails.add(new SaleDetailDTO(sale)));
+    @GetMapping("/client/{client}")
+    public ResponseEntity<List<SaleDTO>> findById(@PathVariable String client) throws ObjectNotFoundException{
+        List<SaleDTO> salesDTO = new ArrayList<>();
+        services.findSaleByNameClient(client).forEach(sale -> salesDTO.add(new SaleDTO(sale)));
 
-        return (!salesDetails.isEmpty()) ?
-                ResponseEntity.ok().body(salesDetails) :
+        return (!salesDTO.isEmpty()) ?
+                ResponseEntity.ok().body(salesDTO) :
                 ResponseEntity.notFound().build();
     }
 
