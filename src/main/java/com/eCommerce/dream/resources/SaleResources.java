@@ -44,7 +44,7 @@ public class SaleResources {
     }
 
     @GetMapping("/client/{client}")
-    public ResponseEntity<List<SaleDTO>> findById(@PathVariable String client) throws ObjectNotFoundException{
+    public ResponseEntity<List<SaleDTO>> findByNameClient(@PathVariable String client) throws ObjectNotFoundException{
         List<SaleDTO> salesDTO = new ArrayList<>();
         services.findSaleByNameClient(client).forEach(sale -> salesDTO.add(new SaleDTO(sale)));
 
