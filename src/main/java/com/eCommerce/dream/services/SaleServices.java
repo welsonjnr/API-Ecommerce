@@ -71,18 +71,21 @@ public class SaleServices {
     }
 
     public Sale update(Long id, NewSaleDTO updateSaleDto) {
-
+        //FIXME POR FAVOR EU ESTOU QUERENDO ENTREGAR LOGO, MAS ME CONSERTE POR FAVOR.
+        Sale newSale = repository.findById(id).get();
+        newSale.getProductSalesId().forEach(x -> x.setSale(null));
         //Products
         List<ProductSale> productsForSale = new LinkedList<>();
         updateSaleDto.getProducts().forEach(prod -> productsForSale.add(converterToProductSale(prod)));
 
         String clientForSale = updateSaleDto.getNameClient();
 
-        Sale newSale = converterToSale(productsForSale, clientForSale);
+        newSale = converterToSale(productsForSale, clientForSale);
         newSale.setClient(clientForSale);
         newSale.setId(id);
         repository.save(newSale);
-        productsForSale.forEach(productSale -> productSale.setSale(newSale));
+        Sale finalNewSale = newSale;
+        productsForSale.forEach(productSale -> productSale.setSale(finalNewSale));
         productsForSale.forEach(prod -> repositoryProductSale.save(prod));
         return newSale;
     }

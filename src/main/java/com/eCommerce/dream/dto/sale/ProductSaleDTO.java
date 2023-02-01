@@ -21,14 +21,17 @@ public class ProductSaleDTO {
     private Double priceSale;
     private String info;
 
+    private Long index;
+
     public ProductSaleDTO() {}
 
-    public ProductSaleDTO(Integer quantity, Long idProduct, String nameProduct, Double priceSale, String info) {
+    public ProductSaleDTO(Integer quantity, Long idProduct, String nameProduct, Double priceSale, String info, Long index) {
         this.quantity = quantity;
         this.idProduct = idProduct;
         this.nameProduct = nameProduct;
         this.priceSale = priceSale;
         this.info = info;
+        this.index = index;
     }
 
     public Integer getQuantity() {
@@ -69,5 +72,13 @@ public class ProductSaleDTO {
 
     public void setInfo(String info) {
         this.info = info;
+    }
+
+    public Long getIndex() {
+        return index;
+    }
+
+    public void setIndex(Long index) {
+        this.index = index;
     }
 }
