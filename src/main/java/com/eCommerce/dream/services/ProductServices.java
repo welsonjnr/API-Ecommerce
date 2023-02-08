@@ -44,7 +44,7 @@ public class ProductServices {
         Price price = new Price(objDto.getCostPrice(), objDto.getSalePrice());
         repositoryPrice.save(price);
 
-        Category category = repositoryCategory.findById(1L).get();
+        Category category = repositoryCategory.findByName(objDto.getNameCategory());
 
         Product product = new Product(null, objDto.getName(), objDto.getDescription(), objDto.getShorDescription(),
                 objDto.getSpecifications(), objDto.getQuantity(), objDto.getAvailable(), objDto.getSize(),
