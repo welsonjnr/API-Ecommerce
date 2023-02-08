@@ -28,7 +28,7 @@ public class ProductDTO {
         this.brand = prod.getBrand();
         this.available = prod.getAvailable();
         this.priceSale = prod.getPrice().getSalePrice();
-        this.imgs = prod.getImgs();
+        this.imgs = prod.getImgs() != null ? prod.getImgs() : null;
         this.nameCategory = prod.getCategory().getName();
     }
 
