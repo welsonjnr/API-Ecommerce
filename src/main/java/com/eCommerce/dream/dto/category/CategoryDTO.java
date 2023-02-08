@@ -11,7 +11,7 @@ public class CategoryDTO {
 
     public CategoryDTO(Category category){
         this.name = category.getName();
-        this.totalSubcategories = category.getSubcategories().size();
+        this.totalSubcategories = category.getSubcategories() != null ? category.getSubcategories().size() : 0;
     }
 
     public String getName() {
