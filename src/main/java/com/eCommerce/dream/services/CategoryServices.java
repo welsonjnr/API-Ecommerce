@@ -35,7 +35,7 @@ public class CategoryServices {
 
         Category category = new Category();
 
-        if (objDto.getSubcategories().isEmpty()){
+        if (objDto.getSubcategories() != null && objDto.getSubcategories().isEmpty()){
             category = new Category(null, objDto.getName());
         }
         else {
