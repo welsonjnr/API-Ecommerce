@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class Sale {
     
     @Id 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private Double amount;
     private LocalDateTime dataSale;

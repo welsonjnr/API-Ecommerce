@@ -17,7 +17,7 @@ import javax.persistence.ManyToOne;
 public class Subcategories {
  
     @Id 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String name;
     
