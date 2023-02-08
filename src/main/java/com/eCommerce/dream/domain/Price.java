@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class Price {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Double salePrice;
     private Double costPrice;

@@ -16,7 +16,7 @@ import javax.persistence.*;
 public class ProductSale {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Integer quantity;
     private Double preco;

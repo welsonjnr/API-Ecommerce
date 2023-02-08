@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class Images {
    
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String imageName;
     private String type;

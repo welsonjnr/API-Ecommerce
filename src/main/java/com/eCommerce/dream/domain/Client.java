@@ -17,7 +17,7 @@ import javax.persistence.*;
 public class Client {
     
     @Id 
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String cpf;
