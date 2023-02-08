@@ -6,7 +6,7 @@ import com.eCommerce.dream.dto.address.AddressDetailDTO;
 import com.eCommerce.dream.dto.address.NewAddressDTO;
 import com.eCommerce.dream.repository.AddressRepository;
 import com.eCommerce.dream.services.AddressServices;
-import javassist.tools.rmi.ObjectNotFoundException;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

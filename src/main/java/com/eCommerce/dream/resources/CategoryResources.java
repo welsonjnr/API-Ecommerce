@@ -9,7 +9,7 @@ import com.eCommerce.dream.dto.client.ClientDTO;
 import com.eCommerce.dream.dto.client.ClientNewDTO;
 import com.eCommerce.dream.repository.CategoryRepository;
 import com.eCommerce.dream.services.CategoryServices;
-import javassist.tools.rmi.ObjectNotFoundException;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;

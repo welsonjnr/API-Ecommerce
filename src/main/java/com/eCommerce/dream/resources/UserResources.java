@@ -11,7 +11,7 @@ import com.eCommerce.dream.dto.user.RoleToUserForm;
 import com.eCommerce.dream.repository.UserRepository;
 import com.eCommerce.dream.services.UserServices;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import javassist.tools.rmi.ObjectNotFoundException;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

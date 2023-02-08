@@ -2,9 +2,7 @@
 package com.eCommerce.dream.resources;
 
 
-import com.eCommerce.dream.domain.Category;
 import com.eCommerce.dream.domain.Client;
-import com.eCommerce.dream.dto.category.CategoryNewDTO;
 import com.eCommerce.dream.dto.client.ClientDTO;
 import com.eCommerce.dream.dto.client.ClientDetailDTO;
 import com.eCommerce.dream.dto.client.ClientNewDTO;
@@ -15,12 +13,11 @@ import java.net.URI;
 import java.util.Optional;
 
 import com.eCommerce.dream.services.ClientServices;
-import javassist.tools.rmi.ObjectNotFoundException;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -36,7 +33,7 @@ public class ClientResources {
     ClientServices services;
     
     @GetMapping(value="/{id}")
-    public ResponseEntity<ClientDetailDTO> findById(@PathVariable Long id) throws ObjectNotFoundException{
+    public ResponseEntity<ClientDetailDTO> findById(@PathVariable Long id) throws ObjectNotFoundException {
         Optional<Client> client = repository.findById(id);
 
            return (!client.isEmpty()) ?

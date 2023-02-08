@@ -1,15 +1,11 @@
 package com.eCommerce.dream.resources;
 
-import com.eCommerce.dream.domain.Category;
 import com.eCommerce.dream.domain.Subcategories;
-import com.eCommerce.dream.dto.category.CategoryDTO;
-import com.eCommerce.dream.dto.category.CategoryDetailDTO;
-import com.eCommerce.dream.dto.category.CategoryNewDTO;
 import com.eCommerce.dream.dto.subcategories.SubcategoriesDTO;
 import com.eCommerce.dream.dto.subcategories.SubcategoriesUpdateDTO;
 import com.eCommerce.dream.repository.SubcategoriesRepository;
 import com.eCommerce.dream.services.SubcategoriesServices;
-import javassist.tools.rmi.ObjectNotFoundException;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
