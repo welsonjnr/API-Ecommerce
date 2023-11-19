@@ -1,4 +1,3 @@
-
 package com.eCommerce.dream.domain;
 
 import com.eCommerce.dream.enums.SaleStatus;
@@ -8,12 +7,13 @@ import java.lang.Double;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.*;
+
+import jakarta.persistence.*;
 
 @Entity
 public class Sale {
-    
-    @Id 
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Double amount;

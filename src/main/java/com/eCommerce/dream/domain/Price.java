@@ -1,26 +1,19 @@
-
 package com.eCommerce.dream.domain;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import java.lang.Double;
 import java.util.Objects;
-import javax.persistence.*;
+
+import jakarta.persistence.*;
 
 @Entity
 public class Price {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Double salePrice;
     private Double costPrice;
     private Long percentagePrice;
-
-    @JsonBackReference
-    @OneToOne(mappedBy = "price")
-    private Product product;
-
     public Price() {}
 
     public Price(Double salePrice, Double costPrice) {
@@ -28,12 +21,11 @@ public class Price {
         this.costPrice = costPrice;
     }
 
-    public Price(Long id, Double salePrice, Double costPrice, Long percentagePrice, Product product) {
+    public Price(Long id, Double salePrice, Double costPrice, Long percentagePrice) {
         this.id = id;
         this.salePrice = salePrice;
         this.costPrice = costPrice;
         this.percentagePrice = percentagePrice;
-        this.product = product;
     }
 
     public Long getId() {
@@ -68,14 +60,6 @@ public class Price {
         this.percentagePrice = percentagePrice;
     }
 
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
     @Override
     public int hashCode() {
         int hash = 7;
@@ -100,5 +84,5 @@ public class Price {
         }
         return true;
     }
-      
+
 }

@@ -1,26 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.eCommerce.dream.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.lang.Double;
 import java.util.Objects;
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 public class ProductSale {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Integer quantity;
     private Double preco;
     private Double amountSaleProduct;
+    private String info;
 
     @OneToOne
     @JoinColumn(name = "product_id")
@@ -48,6 +43,16 @@ public class ProductSale {
         this.product = product;
     }
 
+    public ProductSale(Long id, Integer quantity, Double preco, Double amountSaleProduct, String info, Product product) {
+        this.id = id;
+        this.quantity = quantity;
+        this.preco = preco;
+        this.amountSaleProduct = amountSaleProduct;
+        this.info = info;
+        this.product = product;
+        this.sale = sale;
+    }
+
     public Long getId() {
         return id;
     }
@@ -62,6 +67,14 @@ public class ProductSale {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 
     public Double getPreco() {

@@ -13,6 +13,7 @@ import java.util.List;
 
 public class SaleDetailDTO {
 
+    private Long idSale;
     private Integer totalProducts;
     private Double amountSale;
     private LocalDateTime dataSale;
@@ -21,6 +22,17 @@ public class SaleDetailDTO {
     private SaleStatus saleStatus;
 
     public SaleDetailDTO(Sale sale, ProductSaleRepository repository) {
+        this.idSale = sale.getId();
+        this.products = sale.getProductSalesId();
+        this.client = sale.getClient();
+        this.amountSale = sale.getAmount();
+        this.dataSale = sale.getDataSale();
+        this.totalProducts = sale.getProductSalesId().size();
+        this.saleStatus = sale.getSaleStatus();
+    }
+
+    public SaleDetailDTO(Sale sale) {
+        this.idSale = sale.getId();
         this.products = sale.getProductSalesId();
         this.client = sale.getClient();
         this.amountSale = sale.getAmount();
@@ -77,4 +89,11 @@ public class SaleDetailDTO {
         this.saleStatus = saleStatus;
     }
 
+    public Long getIdSale() {
+        return idSale;
+    }
+
+    public void setIdSale(Long idSale) {
+        this.idSale = idSale;
+    }
 }

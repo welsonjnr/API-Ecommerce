@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @Override
+
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         List<ErrorObject> errors = getErros(ex);
         ErrorReponse errorReponse = getErrorResponse(ex, status, errors);

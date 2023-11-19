@@ -1,11 +1,8 @@
 package com.eCommerce.dream.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
+import jakarta.persistence.*;
 import java.util.Objects;
-import javax.persistence.*;
 
 @Entity
 public class Address {

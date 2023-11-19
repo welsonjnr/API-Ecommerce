@@ -5,6 +5,7 @@ import com.eCommerce.dream.domain.Images;
 import com.eCommerce.dream.domain.Product;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDTO {
@@ -16,7 +17,7 @@ public class ProductDTO {
     private Boolean available;
     private Double priceSale;
     private List<Images> imgs;
-    private List<Category> namesCategory;
+    private String nameCategory;
 
     public ProductDTO() {}
 
@@ -27,8 +28,8 @@ public class ProductDTO {
         this.brand = prod.getBrand();
         this.available = prod.getAvailable();
         this.priceSale = prod.getPrice().getSalePrice();
-        this.imgs = prod.getImgs();
-        this.namesCategory = prod.getCategory();
+        this.imgs = prod.getImgs() != null ? prod.getImgs() : null;
+        this.nameCategory = prod.getCategory().getName();
     }
 
     public Long getId() {
@@ -87,11 +88,11 @@ public class ProductDTO {
         this.imgs = imgs;
     }
 
-    public List<Category> getNamesCategory() {
-        return namesCategory;
+    public String getNameCategory() {
+        return nameCategory;
     }
 
-    public void setNamesCategory(List<Category> namesCategory) {
-        this.namesCategory = namesCategory;
+    public void setNameCategory(Category category) {
+        this.nameCategory = category.getName();
     }
 }

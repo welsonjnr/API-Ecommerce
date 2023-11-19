@@ -1,10 +1,7 @@
 package com.eCommerce.dream.dto.sale;
 
-import com.eCommerce.dream.domain.Product;
-import com.eCommerce.dream.dto.product.ProductDTO;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class ProductSaleDTO {
 
@@ -19,10 +16,18 @@ public class ProductSaleDTO {
     private String nameProduct;
     @NotNull(message = "PriceSale of product cannot be Null or Empty")
     private Double priceSale;
+    private String info;
 
     public ProductSaleDTO() {}
 
     public ProductSaleDTO(Integer quantity, Long idProduct, String nameProduct, Double priceSale) {
+        this.quantity = quantity;
+        this.idProduct = idProduct;
+        this.nameProduct = nameProduct;
+        this.priceSale = priceSale;
+    }
+
+    public ProductSaleDTO(Integer quantity, Long idProduct, String nameProduct, Double priceSale, String info) {
         this.quantity = quantity;
         this.idProduct = idProduct;
         this.nameProduct = nameProduct;
@@ -59,5 +64,13 @@ public class ProductSaleDTO {
 
     public void setPriceSale(Double priceSale) {
         this.priceSale = priceSale;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 }

@@ -5,13 +5,10 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.lang.String;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.Date;
-
+import jakarta.persistence.*;
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.*;
+
 
 @Entity
 public class Client {

@@ -1,17 +1,17 @@
-
 package com.eCommerce.dream.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.*;
 
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.*;
 
 @Entity
 public class Product {
-    
-    @Id 
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
@@ -24,23 +24,24 @@ public class Product {
     private String brand;
     private String unity;
 
-    @JsonManagedReference
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "price_id")
+    @JsonIgnore
     private Price price;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "product")
     private List<Images> imgs;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "product")
-    private List<Category> category;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    @JsonIgnore
+    private Category category;
 
     public Product() {}
 
     public Product(Long id, String name, String description, String shortDescription, String specifications,
-                   Integer quantity, Boolean available, String size, String brand, String unity, Price price, List<Category> category) {
+                   Integer quantity, Boolean available, String size, String brand, String unity, Price price, Category category) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -55,7 +56,7 @@ public class Product {
         this.category = category;
     }
 
-    public Product(Long id, String name, String description, Integer quantity, Boolean available, String brand, Price price, List<Category> category) {
+    public Product(Long id, String name, String description, Integer quantity, Boolean available, String brand, Price price, Category category) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -162,11 +163,11 @@ public class Product {
         this.imgs = imgs;
     }
 
-    public List<Category> getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(List<Category> category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
@@ -191,5 +192,5 @@ public class Product {
         final Product other = (Product) obj;
         return true;
     }
-    
+
 }

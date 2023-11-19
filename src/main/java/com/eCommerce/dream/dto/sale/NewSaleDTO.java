@@ -1,12 +1,8 @@
 package com.eCommerce.dream.dto.sale;
 
-import com.eCommerce.dream.domain.ProductSale;
-import org.hibernate.validator.constraints.br.CPF;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import java.lang.Double;
 import java.util.List;
 
 public class NewSaleDTO {
@@ -16,8 +12,6 @@ public class NewSaleDTO {
     private Long idClient;
     @NotEmpty(message = "Customer name cannot be Null or Empty")
     private String nameClient;
-    @NotBlank @CPF
-    private String cpf;
 
     //Products
     @NotNull
@@ -25,10 +19,9 @@ public class NewSaleDTO {
 
     public NewSaleDTO() {}
 
-    public NewSaleDTO(Long idClient, String nameClient, String cpf, List<ProductSaleDTO> products) {
+    public NewSaleDTO(Long idClient, String nameClient, List<ProductSaleDTO> products) {
         this.idClient = idClient;
         this.nameClient = nameClient;
-        this.cpf = cpf;
         this.products = products;
     }
 
@@ -46,14 +39,6 @@ public class NewSaleDTO {
 
     public void setNameClient(String nameClient) {
         this.nameClient = nameClient;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
     }
 
     public List<ProductSaleDTO> getProducts() {

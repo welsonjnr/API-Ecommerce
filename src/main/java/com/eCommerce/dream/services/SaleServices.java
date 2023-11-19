@@ -48,7 +48,7 @@ public class SaleServices {
         sale.getProducts().forEach(prod -> productsForSale.add(converterToProductSale(prod)));
 
         //Clients
-        Client clientForSale = findClientForSale(sale.getIdClient(), sale.getNameClient(), sale.getCpf());
+        Client clientForSale = findClientForSale(sale.getIdClient());
 
         Sale newSale = converterToSale(productsForSale, clientForSale);
         repository.save(newSale);
@@ -72,8 +72,12 @@ public class SaleServices {
         return sale;
     }
 
-    private Client findClientForSale(Long idClient, String nameClient, String cpf){
+    private Client findClientForSale(Long idClient){
         Client client = repositoryClient.findById(idClient).get();
         return client;
+    }
+
+    public List<Sale> findClientForId(Long id){
+        return repository.findByClientId(id);
     }
 }

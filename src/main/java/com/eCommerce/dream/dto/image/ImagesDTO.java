@@ -1,6 +1,6 @@
 package com.eCommerce.dream.dto.image;
 
-import javax.persistence.Column;
+import jakarta.persistence.Column;
 
 public class ImagesDTO {
 

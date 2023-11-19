@@ -1,10 +1,10 @@
 package com.eCommerce.dream.dto.product;
 
-import com.eCommerce.dream.dto.image.ImagesDTO;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
-import javax.validation.constraints.*;
 import java.lang.Double;
-import java.util.List;
 
 public class ProductNewDTO {
 

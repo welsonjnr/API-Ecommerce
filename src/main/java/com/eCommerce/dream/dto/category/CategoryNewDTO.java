@@ -1,10 +1,7 @@
 package com.eCommerce.dream.dto.category;
 
-import com.eCommerce.dream.domain.Category;
-import com.eCommerce.dream.domain.Product;
-import com.eCommerce.dream.domain.Subcategories;
+import jakarta.validation.constraints.NotBlank;
 
-import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 public class CategoryNewDTO {

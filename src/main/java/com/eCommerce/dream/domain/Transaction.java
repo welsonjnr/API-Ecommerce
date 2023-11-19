@@ -1,9 +1,8 @@
 
 package com.eCommerce.dream.domain;
 
-import java.util.Date;
+import jakarta.persistence.*;
 import java.util.Objects;
-import javax.persistence.*;
 
 @Entity
 public class Transaction {

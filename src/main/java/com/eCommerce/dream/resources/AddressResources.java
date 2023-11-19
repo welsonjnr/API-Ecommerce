@@ -6,13 +6,12 @@ import com.eCommerce.dream.dto.address.AddressDetailDTO;
 import com.eCommerce.dream.dto.address.NewAddressDTO;
 import com.eCommerce.dream.repository.AddressRepository;
 import com.eCommerce.dream.services.AddressServices;
-import javassist.tools.rmi.ObjectNotFoundException;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.validation.Valid;
 import java.net.URI;
 import java.util.Optional;
 
@@ -27,7 +26,7 @@ public class AddressResources{
     private AddressServices services;
 
     @GetMapping(value="/{id}")
-    public ResponseEntity<AddressDetailDTO> findById(@PathVariable Long id) throws ObjectNotFoundException {
+    public ResponseEntity<AddressDetailDTO> findById(@PathVariable Long id) {
         Optional<Address> address = repository.findById(id);
 
         return (!address.isEmpty()) ?

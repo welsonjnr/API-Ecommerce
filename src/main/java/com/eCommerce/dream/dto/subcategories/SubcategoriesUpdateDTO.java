@@ -1,6 +1,6 @@
 package com.eCommerce.dream.dto.subcategories;
 
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 
 public class SubcategoriesUpdateDTO {
 
